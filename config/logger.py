@@ -35,24 +35,25 @@ class AlertProxyLogger:
         if not os.path.exists(self.log_dir):
             os.makedirs(self.log_dir)
 
+        # Remove all existing handlers from the app logger
+        while self.app.logger.hasHandlers():
+            self.app.logger.removeHandler(self.app.logger.handlers[0])
+
         # Set the level for the Flask app's logger
         self.app.logger.setLevel(self.level)
 
         # Create a file handler
         file_handler = logging.FileHandler(self.log_path)
         file_handler.setLevel(self.level)
-        stream_handler = logging.StreamHandler()        
 
         # Create a formatter
         formatter = RequestFormatter(
             '[%(asctime)s] [%(levelname)s] [%(request_id)s] %(module)s: %(message)s'
         )
         file_handler.setFormatter(formatter)
-        stream_handler.setFormatter(formatter)
 
         # Add the file handler to the app's logger
         self.app.logger.addHandler(file_handler)
-        self.app.logger.addHandler(stream_handler)
         self.app.logger.propagate = False 
 
     def debug(self, message, *args, **kwargs):

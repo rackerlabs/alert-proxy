@@ -6,7 +6,7 @@
 # \_| |_/_|\___|_|   \__\_|  |_|  \___/_/\_\\__, |
 #                    Alert-Proxy             __/ |
 #                                           |___/
-from flask import Flask
+from flask import Flask, jsonify
 from flask_request_id_header.middleware import RequestID
 from config.logger import AlertProxyLogger
 from config.config import AlertProxyConfig
@@ -22,6 +22,11 @@ def create_app():
 
     # add request-id to all calls
     RequestID(app)
+
+    @app.route("/", defaults={"path": ""})
+    @app.route("/<path:path>")
+    def catch_all(path):
+        return jsonify({"message": f"Request revieced on unconfiguered endpoint"}), 202
 
     # Register process_alert blueprint with /alert/process
     from apps.process_alert import process_alert_bp

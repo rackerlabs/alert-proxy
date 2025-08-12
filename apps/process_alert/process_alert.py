@@ -62,7 +62,7 @@ class ProcessAlert(MethodView):
     def get(self):
         current_app.logger.info(f"This is a request")
         return_payload = {"status": "success", "message": "This is a JSON message!"}
-        return jsonify(data)        
+        return jsonify(return_payload)        
 
     def post(self):
         """
@@ -121,4 +121,4 @@ class ProcessAlert(MethodView):
 #                return jsonify({"error": f"Invalid JSON detected: {str(e)}"}), 400
 
 
-#process_alert_bp.add_url_rule('/process', view_func=ProcessAlert.as_view('alert_api'))
+process_alert_bp.add_url_rule('/process', view_func=ProcessAlert.as_view('alert_api'))
