@@ -6,7 +6,7 @@
 # \_| |_/_|\___|_|   \__\_|  |_|  \___/_/\_\\__, |
 #                    Alert-Proxy             __/ |
 #                                           |___/
-venv/
-.venv/
-*__pycache__*
-logs/*
+Flask==3.1.1
+uWSGI==2.0.28
+requests==2.32.3
+flask-request-id-header==0.1.1

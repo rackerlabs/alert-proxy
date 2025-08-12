@@ -6,7 +6,8 @@
 # \_| |_/_|\___|_|   \__\_|  |_|  \___/_/\_\\__, |
 #                    Alert-Proxy             __/ |
 #                                           |___/
-venv/
-.venv/
-*__pycache__*
-logs/*
+from flask import Blueprint
+
+process_alert_bp = Blueprint('process_alert_bp', __name__, url_prefix='/alert')
+
+from . import process_view

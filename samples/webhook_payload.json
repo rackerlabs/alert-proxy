@@ -1,0 +1,39 @@
+{
+  "receiver": "critical_alerts_receiver",
+  "status": "firing",
+  "alerts": [
+    {
+      "status": "firing",
+      "labels": {
+        "alertname": "brew-test-alert",
+        "instance": "10.236.0.231:8080",
+        "severity": "warning"
+      },
+      "annotations": {
+        "summary": "CPU load is high on instance server1.example.com",
+        "description": "The CPU load on the server has exceeded 90%."
+      },
+      "startsAt": "2025-02-11T14:52:00Z",
+      "endsAt": "2025-02-11T15:52:00Z",
+      "generatorURL": "https://alertmanager.dev.dfw.ohthree.com",
+      "fingerprint": "3ee2c084790c544d"
+    }
+  ],
+  "groupLabels": {
+    "alertname": "HighCpuLoad"
+  },
+  "commonLabels": {
+    "severity": "warning",
+    "instance": "brew.is.awesome.com",
+    "rackspace_com_coreAccountID:": "935811",
+    "rackspace_com_overseerID": "5002029"
+  },
+  "commonAnnotations": {
+    "summary": "CPU load is high on server1.example.com",
+    "description": "The CPU load on the server has exceeded 90%."
+  },
+  "externalURL": "https://alertmanager.dev.dfw.ohthree.com",
+  "version": "4",
+  "groupKey": "{}:{alertname='brew-test-alert', severity='warning'}"
+}
+

@@ -6,7 +6,6 @@
 # \_| |_/_|\___|_|   \__\_|  |_|  \___/_/\_\\__, |
 #                    Alert-Proxy             __/ |
 #                                           |___/
-venv/
-.venv/
-*__pycache__*
-logs/*
+from alertproxy import create_app
+
+app = create_app()

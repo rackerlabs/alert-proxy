@@ -1,0 +1,45 @@
+{
+  "receiver": "Default",
+  "status": "firing",
+  "alerts": [
+    {
+      "status": "firing",
+      "labels": {
+        "alertname": "PrometheusMissingRuleEvaluations",
+        "container": "kube-rbac-proxy",
+        "endpoint": "metrics",
+        "instance": "10.254.40.166:9092",
+        "job": "prometheus-k8s",
+        "namespace": "openshift-monitoring",
+        "openshift_io_alert_source": "platform",
+        "pod": "prometheus-k8s-1",
+        "prometheus": "openshift-monitoring/k8s",
+        "rule_group": "/etc/prometheus/rules/prometheus-k8s-rulefiles-0/openshift-kube-apiserver-kube-apiserver-slos-94dbc1dd-b771-4899-8c8f-54c0f5353e04.yaml;kube-apiserver.rules",
+        "service": "prometheus-k8s",
+        "severity": "warning"
+      },
+      "annotations": {
+        "description": "Prometheus openshift-monitoring/prometheus-k8s-1 has missed 1 rule group evaluations in the last 5m.",
+        "summary": "Prometheus is missing rule evaluations due to slow rule group evaluation."
+      },
+      "startsAt": "2023-06-01T17:02:53.691Z",
+      "endsAt": "0001-01-01T00:00:00Z",
+      "generatorURL": "https://prometheus-k8s-openshift-monitoring.apps.example.ibm.com/graph?g0.expr=increase%28prometheus_rule_group_iterations_missed_total%7Bjob%3D~%22prometheus-k8s%7Cprometheus-user-workload%22%7D%5B5m%5D%29+%3E+0&g0.tab=1",
+      "fingerprint": "24ad9e973e22bdce"
+    },
+  ],
+  "groupLabels": {
+    "namespace": "openshift-monitoring"
+  },
+  "commonLabels": {
+    "namespace": "openshift-monitoring",
+    "openshift_io_alert_source": "platform",
+    "prometheus": "openshift-monitoring/k8s",
+    "severity": "warning"
+  },
+  "commonAnnotations": {},
+  "externalURL": "https:///console-openshift-console.apps.example.ibm.com/monitoring",
+  "version": "4",
+  "groupKey": "{}:{namespace=\"openshift-monitoring\"}",
+  "truncatedAlerts": 0
+}
