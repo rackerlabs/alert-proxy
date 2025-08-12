@@ -27,8 +27,8 @@ class Config:
 
 class AlertProxyConfig(Config):
     APP_DEBUG = False
-    LOG_LEVEL = 'DEBUG'
-    ALERT_VERIFICATION = False
+    LOG_LEVEL = 'INFO'
+    ALERT_VERIFICATION = True
     CORE_ACCOUNT_ID = "935811"
     CORE_OVERSEER_ID = "5002029"
     ACCOUNT_SECRET = "e752bde87816b3b9778b98b21608a45b7bbbfe0a02f2449058372c5732bd2a61"
