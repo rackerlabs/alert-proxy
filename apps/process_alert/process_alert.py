@@ -125,8 +125,6 @@ class ProcessAlert(MethodView):
                     current_app.logger.info(f"Alert is either 'active' or 'resolved'. skipping ticket creation.")
                     continue
             current_app.logger.info(f"Formatting alert for watchman ingestion")
-# watchman.api.manage.rackspace.com/v1/hybrid:5915600/webhook/platformservices?secret=0f873f0757b438dabd2062b4b9755787d4c05f1e7c1250aff024f0f619cb86f5&severity=low
-            
             w_url = f"https;//watchman.api.manage.rackspace.com/v1/hybrid:{ a_coreAccountID }/webihook/platformservices?secret={ a_secret }"
             w_headers = {
                     "Accept": "application/json",
@@ -151,7 +149,6 @@ NOTE: NO ACTION NEEDED, THIS IS FOR ALERTMANGER->CORE Ticket creation testing.  
             # post the payload against watchman
             try:
                 current_app.logger.debug(f"Payload: {w_payload}")
-#                response = self._create_core_ticket(w_url, w_headers, w_payload)
             except Exception as e:
                 current_app.logged.error(f"Uncaught error: {str(e)}")
                 continue
