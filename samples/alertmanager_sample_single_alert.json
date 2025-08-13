@@ -1,0 +1,54 @@
+{
+    "annotations": {
+        "description": "\nlabels: map[__name__:node_dmpath_info container:node-exporter device:sdd device_mapper_state:failed device_state:running dm_dev:8:48 endpoint:http-metrics hcil:3:0:0:1 init_st:ok instance:172.28.232.128:9100 interface_ip:[undef] job:node-exporter marginal_st:normal multipath_id:361de0323904507087900d1911c8f98d8 namespace:prometheus path_checker_state:faulty pod:kube-prometheus-stack-prometheus-node-exporter-ftf8w protocol:scsi:iscsi service:kube-prometheus-stack-prometheus-node-exporter size:20G vendor:IET,VIRTUAL-DISK volume_id:00ea21de-3239-4507-8790-d1911c8f98d8]",
+        "summary": "Multipathd paths are NOT active|ready and paths are likely orphaned"
+    },
+    "endsAt": "2025-08-12T14:11:25.148Z",
+    "fingerprint": "fff2a1453f269307",
+    "receivers": [
+        {
+            "name": "all_alerts_receiver"
+        },
+        {
+            "name": "critical_alerts_receiver"
+        },
+        {
+            "name": "msteams_config"
+        }
+    ],
+    "startsAt": "2025-08-12T03:52:25.148Z",
+    "status": {
+        "inhibitedBy": [],
+        "silencedBy": [],
+        "state": "active"
+    },
+    "updatedAt": "2025-08-12T14:07:25.155Z",
+    "generatorURL": "http://kube-prometheus-stack-prometheus.prometheus:9090/graph?g0.expr=node_dmpath_info%7Bpath_checker_state%21~%22active%7Cready%22%7D&g0.tab=1",
+    "labels": {
+        "alertname": "NodeDmpathInfoMultipathCritical",
+        "container": "node-exporter",
+        "device": "sdd",
+        "device_mapper_state": "failed",
+        "device_state": "running",
+        "dm_dev": "8:48",
+        "endpoint": "http-metrics",
+        "hcil": "3:0:0:1",
+        "init_st": "ok",
+        "instance": "172.28.232.128:9100",
+        "interface_ip": "[undef]",
+        "job": "node-exporter",
+        "marginal_st": "normal",
+        "multipath_id": "361de0323904507087900d1911c8f98d8",
+        "namespace": "prometheus",
+        "node": "172.28.232.128:9100",
+        "path_checker_state": "faulty",
+        "pod": "kube-prometheus-stack-prometheus-node-exporter-ftf8w",
+        "prometheus": "prometheus/kube-prometheus-stack-prometheus",
+        "protocol": "scsi:iscsi",
+        "service": "kube-prometheus-stack-prometheus-node-exporter",
+        "severity": "critical",
+        "size": "20G",
+        "vendor": "IET,VIRTUAL-DISK",
+        "volume_id": "00ea21de-3239-4507-8790-d1911c8f98d8"
+    }
+}

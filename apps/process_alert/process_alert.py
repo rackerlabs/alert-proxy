@@ -84,10 +84,11 @@ class ProcessAlert(MethodView):
 
         if content_type == 'application/json':
             alert_data = request.get_json(silent=True)
+            current_app.logger.error(f"alert_data: { alert_data } alert_data.get('commonAnnotations'): {alert_data.get('commonAnnotations')} alert_data.get('commonLabels'): {alert_data.get('commonLabels')}")
             if not alert_data or not (alert_data.get('commonAnnotations') or
-                                       alert_data.get('commonAnnotations') or
                                        alert_data.get('commonLabels')):
                 current_app.logger.error(f"Invalid or missing json payload")
+                current_app.logger.info(f"Value of INVALID data: { alert_data }")
                 current_app.logger.info(f"END alert processing......")
                 return jsonify({"message": f"Invalid or missing json payload"}), 400
             current_app.logger.debug(f"Value of post from alertmanager webhook: { alert_data }")

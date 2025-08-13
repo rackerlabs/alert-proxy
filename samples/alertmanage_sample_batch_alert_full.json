@@ -1,0 +1,850 @@
+[
+  {
+    "annotations": {
+      "description": "\nlabels: map[__name__:node_dmpath_info container:node-exporter device:sdb device_mapper_state:failed device_state:running dm_dev:8:16 endpoint:http-metrics hcil:1:0:0:1 init_st:ok instance:172.28.232.128:9100 interface_ip:[undef] job:node-exporter marginal_st:normal multipath_id:3671e06618043a909ce2079b36ab1daa8 namespace:prometheus path_checker_state:faulty pod:kube-prometheus-stack-prometheus-node-exporter-ftf8w protocol:scsi:iscsi service:kube-prometheus-stack-prometheus-node-exporter size:20G vendor:IET,VIRTUAL-DISK volume_id:3f2cd71e-6618-43a9-9ce2-79b36ab1daa8]",
+      "summary": "Multipathd paths are NOT active|ready and paths are likely orphaned"
+    },
+    "endsAt": "2025-08-12T21:40:25.148Z",
+    "fingerprint": "03c4c646ce86fe92",
+    "receivers": [
+      {
+        "name": "all_alerts_receiver"
+      },
+      {
+        "name": "alert_proxy_alerts_receiver"
+      },
+      {
+        "name": "msteams_config"
+      }
+    ],
+    "startsAt": "2025-08-11T20:27:25.148Z",
+    "status": {
+      "inhibitedBy": [],
+      "silencedBy": [],
+      "state": "active"
+    },
+    "updatedAt": "2025-08-12T21:36:25.154Z",
+    "generatorURL": "http://kube-prometheus-stack-prometheus.prometheus:9090/graph?g0.expr=node_dmpath_info%7Bpath_checker_state%21~%22active%7Cready%22%7D&g0.tab=1",
+    "labels": {
+      "alertname": "NodeDmpathInfoMultipathCritical",
+      "container": "node-exporter",
+      "device": "sdb",
+      "device_mapper_state": "failed",
+      "device_state": "running",
+      "dm_dev": "8:16",
+      "endpoint": "http-metrics",
+      "hcil": "1:0:0:1",
+      "init_st": "ok",
+      "instance": "172.28.232.128:9100",
+      "interface_ip": "[undef]",
+      "job": "node-exporter",
+      "marginal_st": "normal",
+      "multipath_id": "3671e06618043a909ce2079b36ab1daa8",
+      "namespace": "prometheus",
+      "node": "172.28.232.128:9100",
+      "path_checker_state": "faulty",
+      "pod": "kube-prometheus-stack-prometheus-node-exporter-ftf8w",
+      "prometheus": "prometheus/kube-prometheus-stack-prometheus",
+      "protocol": "scsi:iscsi",
+      "service": "kube-prometheus-stack-prometheus-node-exporter",
+      "severity": "critical",
+      "size": "20G",
+      "vendor": "IET,VIRTUAL-DISK",
+      "volume_id": "3f2cd71e-6618-43a9-9ce2-79b36ab1daa8"
+    }
+  },
+  {
+    "annotations": {
+      "description": "\nlabels: map[__name__:node_dmpath_info container:node-exporter device:sde device_mapper_state:failed device_state:running dm_dev:8:64 endpoint:http-metrics hcil:10:0:0:1 init_st:ok instance:172.28.232.124:9100 interface_ip:[undef] job:node-exporter marginal_st:normal multipath_id:36f7c0fe9f041b10be240f5196b973d1b namespace:prometheus path_checker_state:faulty pod:kube-prometheus-stack-prometheus-node-exporter-rmhm5 protocol:scsi:iscsi service:kube-prometheus-stack-prometheus-node-exporter size:20G vendor:IET,VIRTUAL-DISK volume_id:5dc62f7c-fe9f-41b1-be24-f5196b973d1b]",
+      "summary": "Multipathd paths are NOT active|ready and paths are likely orphaned"
+    },
+    "endsAt": "2025-08-12T21:39:55.148Z",
+    "fingerprint": "098ace1dd5fee4cc",
+    "receivers": [
+      {
+        "name": "all_alerts_receiver"
+      },
+      {
+        "name": "alert_proxy_alerts_receiver"
+      },
+      {
+        "name": "msteams_config"
+      }
+    ],
+    "startsAt": "2025-08-12T09:37:25.148Z",
+    "status": {
+      "inhibitedBy": [],
+      "silencedBy": [],
+      "state": "active"
+    },
+    "updatedAt": "2025-08-12T21:35:55.158Z",
+    "generatorURL": "http://kube-prometheus-stack-prometheus.prometheus:9090/graph?g0.expr=node_dmpath_info%7Bpath_checker_state%21~%22active%7Cready%22%7D&g0.tab=1",
+    "labels": {
+      "alertname": "NodeDmpathInfoMultipathCritical",
+      "container": "node-exporter",
+      "device": "sde",
+      "device_mapper_state": "failed",
+      "device_state": "running",
+      "dm_dev": "8:64",
+      "endpoint": "http-metrics",
+      "hcil": "10:0:0:1",
+      "init_st": "ok",
+      "instance": "172.28.232.124:9100",
+      "interface_ip": "[undef]",
+      "job": "node-exporter",
+      "marginal_st": "normal",
+      "multipath_id": "36f7c0fe9f041b10be240f5196b973d1b",
+      "namespace": "prometheus",
+      "node": "172.28.232.124:9100",
+      "path_checker_state": "faulty",
+      "pod": "kube-prometheus-stack-prometheus-node-exporter-rmhm5",
+      "prometheus": "prometheus/kube-prometheus-stack-prometheus",
+      "protocol": "scsi:iscsi",
+      "service": "kube-prometheus-stack-prometheus-node-exporter",
+      "severity": "critical",
+      "size": "20G",
+      "vendor": "IET,VIRTUAL-DISK",
+      "volume_id": "5dc62f7c-fe9f-41b1-be24-f5196b973d1b"
+    }
+  },
+  {
+    "annotations": {
+      "description": "\nlabels: map[__name__:node_dmpath_info container:node-exporter device:sdc device_mapper_state:failed device_state:running dm_dev:8:32 endpoint:http-metrics hcil:2:0:0:1 init_st:ok instance:172.28.232.122:9100 interface_ip:[undef] job:node-exporter marginal_st:normal multipath_id:368820461904cc90b1600c6565c971dec namespace:prometheus path_checker_state:faulty pod:kube-prometheus-stack-prometheus-node-exporter-9qht4 protocol:scsi:iscsi service:kube-prometheus-stack-prometheus-node-exporter size:20G vendor:IET,VIRTUAL-DISK volume_id:7292a882-4619-4cc9-b160-c6565c971dec]",
+      "summary": "Multipathd paths are NOT active|ready and paths are likely orphaned"
+    },
+    "endsAt": "2025-08-12T21:39:25.148Z",
+    "fingerprint": "0ff62c88bd708676",
+    "receivers": [
+      {
+        "name": "all_alerts_receiver"
+      },
+      {
+        "name": "alert_proxy_alerts_receiver"
+      },
+      {
+        "name": "msteams_config"
+      }
+    ],
+    "startsAt": "2025-08-12T20:32:25.148Z",
+    "status": {
+      "inhibitedBy": [],
+      "silencedBy": [],
+      "state": "active"
+    },
+    "updatedAt": "2025-08-12T21:35:25.155Z",
+    "generatorURL": "http://kube-prometheus-stack-prometheus.prometheus:9090/graph?g0.expr=node_dmpath_info%7Bpath_checker_state%21~%22active%7Cready%22%7D&g0.tab=1",
+    "labels": {
+      "alertname": "NodeDmpathInfoMultipathCritical",
+      "container": "node-exporter",
+      "device": "sdc",
+      "device_mapper_state": "failed",
+      "device_state": "running",
+      "dm_dev": "8:32",
+      "endpoint": "http-metrics",
+      "hcil": "2:0:0:1",
+      "init_st": "ok",
+      "instance": "172.28.232.122:9100",
+      "interface_ip": "[undef]",
+      "job": "node-exporter",
+      "marginal_st": "normal",
+      "multipath_id": "368820461904cc90b1600c6565c971dec",
+      "namespace": "prometheus",
+      "node": "172.28.232.122:9100",
+      "path_checker_state": "faulty",
+      "pod": "kube-prometheus-stack-prometheus-node-exporter-9qht4",
+      "prometheus": "prometheus/kube-prometheus-stack-prometheus",
+      "protocol": "scsi:iscsi",
+      "service": "kube-prometheus-stack-prometheus-node-exporter",
+      "severity": "critical",
+      "size": "20G",
+      "vendor": "IET,VIRTUAL-DISK",
+      "volume_id": "7292a882-4619-4cc9-b160-c6565c971dec"
+    }
+  },
+  {
+    "annotations": {
+      "description": "\nlabels: map[__name__:node_dmpath_info container:node-exporter device:sde device_mapper_state:failed device_state:running dm_dev:8:64 endpoint:http-metrics hcil:4:0:0:1 init_st:ok instance:172.28.232.128:9100 interface_ip:[undef] job:node-exporter marginal_st:normal multipath_id:361de0323904507087900d1911c8f98d8 namespace:prometheus path_checker_state:faulty pod:kube-prometheus-stack-prometheus-node-exporter-ftf8w protocol:scsi:iscsi service:kube-prometheus-stack-prometheus-node-exporter size:20G vendor:IET,VIRTUAL-DISK volume_id:00ea21de-3239-4507-8790-d1911c8f98d8]",
+      "summary": "Multipathd paths are NOT active|ready and paths are likely orphaned"
+    },
+    "endsAt": "2025-08-12T21:39:55.148Z",
+    "fingerprint": "17ff2246232c6ee9",
+    "receivers": [
+      {
+        "name": "all_alerts_receiver"
+      },
+      {
+        "name": "alert_proxy_alerts_receiver"
+      },
+      {
+        "name": "msteams_config"
+      }
+    ],
+    "startsAt": "2025-08-12T03:52:25.148Z",
+    "status": {
+      "inhibitedBy": [],
+      "silencedBy": [],
+      "state": "active"
+    },
+    "updatedAt": "2025-08-12T21:35:55.158Z",
+    "generatorURL": "http://kube-prometheus-stack-prometheus.prometheus:9090/graph?g0.expr=node_dmpath_info%7Bpath_checker_state%21~%22active%7Cready%22%7D&g0.tab=1",
+    "labels": {
+      "alertname": "NodeDmpathInfoMultipathCritical",
+      "container": "node-exporter",
+      "device": "sde",
+      "device_mapper_state": "failed",
+      "device_state": "running",
+      "dm_dev": "8:64",
+      "endpoint": "http-metrics",
+      "hcil": "4:0:0:1",
+      "init_st": "ok",
+      "instance": "172.28.232.128:9100",
+      "interface_ip": "[undef]",
+      "job": "node-exporter",
+      "marginal_st": "normal",
+      "multipath_id": "361de0323904507087900d1911c8f98d8",
+      "namespace": "prometheus",
+      "node": "172.28.232.128:9100",
+      "path_checker_state": "faulty",
+      "pod": "kube-prometheus-stack-prometheus-node-exporter-ftf8w",
+      "prometheus": "prometheus/kube-prometheus-stack-prometheus",
+      "protocol": "scsi:iscsi",
+      "service": "kube-prometheus-stack-prometheus-node-exporter",
+      "severity": "critical",
+      "size": "20G",
+      "vendor": "IET,VIRTUAL-DISK",
+      "volume_id": "00ea21de-3239-4507-8790-d1911c8f98d8"
+    }
+  },
+  {
+    "annotations": {
+      "description": "Job openstack/mariadb-backup-29196360 failed to complete. Removing failed job after investigation should clear this alert on cluster .",
+      "runbook_url": "https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubejobfailed",
+      "summary": "Job failed to complete."
+    },
+    "endsAt": "2025-08-12T21:39:22.050Z",
+    "fingerprint": "1999eabe1bd113cd",
+    "receivers": [
+      {
+        "name": "all_alerts_receiver"
+      },
+      {
+        "name": "alert_proxy_alerts_receiver"
+      },
+      {
+        "name": "msteams_config"
+      }
+    ],
+    "startsAt": "2025-08-01T14:33:52.050Z",
+    "status": {
+      "inhibitedBy": [],
+      "silencedBy": [],
+      "state": "active"
+    },
+    "updatedAt": "2025-08-12T21:35:22.155Z",
+    "generatorURL": "http://kube-prometheus-stack-prometheus.prometheus:9090/graph?g0.expr=kube_job_failed%7Bjob%3D%22kube-state-metrics%22%2Cnamespace%3D~%22.%2A%22%7D+%3E+0&g0.tab=1",
+    "labels": {
+      "alertname": "KubeJobFailed",
+      "condition": "true",
+      "container": "kube-state-metrics",
+      "endpoint": "http",
+      "instance": "10.236.5.105:8080",
+      "job": "kube-state-metrics",
+      "job_name": "mariadb-backup-29196360",
+      "namespace": "openstack",
+      "pod": "kube-prometheus-stack-kube-state-metrics-8b7b784f4-hl4g5",
+      "prometheus": "prometheus/kube-prometheus-stack-prometheus",
+      "rackspace_com_coreAccountID": "5002029",
+      "rackspace_com_overseerID": "935811",
+      "service": "kube-prometheus-stack-kube-state-metrics",
+      "severity": "warning"
+    }
+  },
+  {
+    "annotations": {
+      "description": "\nlabels: map[__name__:node_dmpath_info container:node-exporter device:sdd device_mapper_state:failed device_state:running dm_dev:8:48 endpoint:http-metrics hcil:9:0:0:1 init_st:ok instance:172.28.232.124:9100 interface_ip:[undef] job:node-exporter marginal_st:normal multipath_id:36f7c0fe9f041b10be240f5196b973d1b namespace:prometheus path_checker_state:faulty pod:kube-prometheus-stack-prometheus-node-exporter-rmhm5 protocol:scsi:iscsi service:kube-prometheus-stack-prometheus-node-exporter size:20G vendor:IET,VIRTUAL-DISK volume_id:5dc62f7c-fe9f-41b1-be24-f5196b973d1b]",
+      "summary": "Multipathd paths are NOT active|ready and paths are likely orphaned"
+    },
+    "endsAt": "2025-08-12T21:39:55.148Z",
+    "fingerprint": "2d4071436d8f23a5",
+    "receivers": [
+      {
+        "name": "all_alerts_receiver"
+      },
+      {
+        "name": "alert_proxy_alerts_receiver"
+      },
+      {
+        "name": "msteams_config"
+      }
+    ],
+    "startsAt": "2025-08-12T09:37:25.148Z",
+    "status": {
+      "inhibitedBy": [],
+      "silencedBy": [],
+      "state": "active"
+    },
+    "updatedAt": "2025-08-12T21:35:55.158Z",
+    "generatorURL": "http://kube-prometheus-stack-prometheus.prometheus:9090/graph?g0.expr=node_dmpath_info%7Bpath_checker_state%21~%22active%7Cready%22%7D&g0.tab=1",
+    "labels": {
+      "alertname": "NodeDmpathInfoMultipathCritical",
+      "container": "node-exporter",
+      "device": "sdd",
+      "device_mapper_state": "failed",
+      "device_state": "running",
+      "dm_dev": "8:48",
+      "endpoint": "http-metrics",
+      "hcil": "9:0:0:1",
+      "init_st": "ok",
+      "instance": "172.28.232.124:9100",
+      "interface_ip": "[undef]",
+      "job": "node-exporter",
+      "marginal_st": "normal",
+      "multipath_id": "36f7c0fe9f041b10be240f5196b973d1b",
+      "namespace": "prometheus",
+      "node": "172.28.232.124:9100",
+      "path_checker_state": "faulty",
+      "pod": "kube-prometheus-stack-prometheus-node-exporter-rmhm5",
+      "prometheus": "prometheus/kube-prometheus-stack-prometheus",
+      "protocol": "scsi:iscsi",
+      "service": "kube-prometheus-stack-prometheus-node-exporter",
+      "severity": "critical",
+      "size": "20G",
+      "vendor": "IET,VIRTUAL-DISK",
+      "volume_id": "5dc62f7c-fe9f-41b1-be24-f5196b973d1b"
+    }
+  },
+  {
+    "annotations": {
+      "description": "HPA openstack/skyline-apiserver has been running at max replicas for longer than 15 minutes on cluster .",
+      "runbook_url": "https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubehpamaxedout",
+      "summary": "HPA is running at max replicas"
+    },
+    "endsAt": "2025-08-12T21:39:52.050Z",
+    "fingerprint": "3ccbfed2ddfea05c",
+    "receivers": [
+      {
+        "name": "all_alerts_receiver"
+      },
+      {
+        "name": "alert_proxy_alerts_receiver"
+      },
+      {
+        "name": "msteams_config"
+      }
+    ],
+    "startsAt": "2025-08-12T18:04:22.050Z",
+    "status": {
+      "inhibitedBy": [],
+      "silencedBy": [],
+      "state": "active"
+    },
+    "updatedAt": "2025-08-12T21:35:52.181Z",
+    "generatorURL": "http://kube-prometheus-stack-prometheus.prometheus:9090/graph?g0.expr=kube_horizontalpodautoscaler_status_current_replicas%7Bjob%3D%22kube-state-metrics%22%2Cnamespace%3D~%22.%2A%22%7D+%3D%3D+kube_horizontalpodautoscaler_spec_max_replicas%7Bjob%3D%22kube-state-metrics%22%2Cnamespace%3D~%22.%2A%22%7D&g0.tab=1",
+    "labels": {
+      "alertname": "KubeHpaMaxedOut",
+      "container": "kube-state-metrics",
+      "endpoint": "http",
+      "horizontalpodautoscaler": "skyline-apiserver",
+      "instance": "10.236.5.105:8080",
+      "job": "kube-state-metrics",
+      "namespace": "openstack",
+      "pod": "kube-prometheus-stack-kube-state-metrics-8b7b784f4-hl4g5",
+      "prometheus": "prometheus/kube-prometheus-stack-prometheus",
+      "rackspace_com_coreAccountID": "5002029",
+      "rackspace_com_overseerID": "935811",
+      "service": "kube-prometheus-stack-kube-state-metrics",
+      "severity": "warning"
+    }
+  },
+  {
+    "annotations": {
+      "description": "\nlabels: map[__name__:node_dmpath_info container:node-exporter device:sdb device_mapper_state:failed device_state:running dm_dev:8:16 endpoint:http-metrics hcil:7:0:0:1 init_st:ok instance:172.28.232.124:9100 interface_ip:[undef] job:node-exporter marginal_st:normal multipath_id:36bea04cbd04b1e08f6906dd5236b9fd7 namespace:prometheus path_checker_state:faulty pod:kube-prometheus-stack-prometheus-node-exporter-rmhm5 protocol:scsi:iscsi service:kube-prometheus-stack-prometheus-node-exporter size:20G vendor:IET,VIRTUAL-DISK volume_id:6d0b6bea-4cbd-4b1e-8f69-6dd5236b9fd7]",
+      "summary": "Multipathd paths are NOT active|ready and paths are likely orphaned"
+    },
+    "endsAt": "2025-08-12T21:39:55.148Z",
+    "fingerprint": "4da57bb488fa0bba",
+    "receivers": [
+      {
+        "name": "all_alerts_receiver"
+      },
+      {
+        "name": "alert_proxy_alerts_receiver"
+      },
+      {
+        "name": "msteams_config"
+      }
+    ],
+    "startsAt": "2025-08-12T01:37:25.148Z",
+    "status": {
+      "inhibitedBy": [],
+      "silencedBy": [],
+      "state": "active"
+    },
+    "updatedAt": "2025-08-12T21:35:55.158Z",
+    "generatorURL": "http://kube-prometheus-stack-prometheus.prometheus:9090/graph?g0.expr=node_dmpath_info%7Bpath_checker_state%21~%22active%7Cready%22%7D&g0.tab=1",
+    "labels": {
+      "alertname": "NodeDmpathInfoMultipathCritical",
+      "container": "node-exporter",
+      "device": "sdb",
+      "device_mapper_state": "failed",
+      "device_state": "running",
+      "dm_dev": "8:16",
+      "endpoint": "http-metrics",
+      "hcil": "7:0:0:1",
+      "init_st": "ok",
+      "instance": "172.28.232.124:9100",
+      "interface_ip": "[undef]",
+      "job": "node-exporter",
+      "marginal_st": "normal",
+      "multipath_id": "36bea04cbd04b1e08f6906dd5236b9fd7",
+      "namespace": "prometheus",
+      "node": "172.28.232.124:9100",
+      "path_checker_state": "faulty",
+      "pod": "kube-prometheus-stack-prometheus-node-exporter-rmhm5",
+      "prometheus": "prometheus/kube-prometheus-stack-prometheus",
+      "protocol": "scsi:iscsi",
+      "service": "kube-prometheus-stack-prometheus-node-exporter",
+      "severity": "critical",
+      "size": "20G",
+      "vendor": "IET,VIRTUAL-DISK",
+      "volume_id": "6d0b6bea-4cbd-4b1e-8f69-6dd5236b9fd7"
+    }
+  },
+  {
+    "annotations": {
+      "description": "\nlabels: map[__name__:node_dmpath_info container:node-exporter device:sdc device_mapper_state:failed device_state:running dm_dev:8:32 endpoint:http-metrics hcil:2:0:0:1 init_st:ok instance:172.28.232.128:9100 interface_ip:[undef] job:node-exporter marginal_st:normal multipath_id:3671e06618043a909ce2079b36ab1daa8 namespace:prometheus path_checker_state:faulty pod:kube-prometheus-stack-prometheus-node-exporter-ftf8w protocol:scsi:iscsi service:kube-prometheus-stack-prometheus-node-exporter size:20G vendor:IET,VIRTUAL-DISK volume_id:3f2cd71e-6618-43a9-9ce2-79b36ab1daa8]",
+      "summary": "Multipathd paths are NOT active|ready and paths are likely orphaned"
+    },
+    "endsAt": "2025-08-12T21:40:25.148Z",
+    "fingerprint": "5eba9b2ebb13e3d8",
+    "receivers": [
+      {
+        "name": "all_alerts_receiver"
+      },
+      {
+        "name": "alert_proxy_alerts_receiver"
+      },
+      {
+        "name": "msteams_config"
+      }
+    ],
+    "startsAt": "2025-08-11T20:27:25.148Z",
+    "status": {
+      "inhibitedBy": [],
+      "silencedBy": [],
+      "state": "active"
+    },
+    "updatedAt": "2025-08-12T21:36:25.154Z",
+    "generatorURL": "http://kube-prometheus-stack-prometheus.prometheus:9090/graph?g0.expr=node_dmpath_info%7Bpath_checker_state%21~%22active%7Cready%22%7D&g0.tab=1",
+    "labels": {
+      "alertname": "NodeDmpathInfoMultipathCritical",
+      "container": "node-exporter",
+      "device": "sdc",
+      "device_mapper_state": "failed",
+      "device_state": "running",
+      "dm_dev": "8:32",
+      "endpoint": "http-metrics",
+      "hcil": "2:0:0:1",
+      "init_st": "ok",
+      "instance": "172.28.232.128:9100",
+      "interface_ip": "[undef]",
+      "job": "node-exporter",
+      "marginal_st": "normal",
+      "multipath_id": "3671e06618043a909ce2079b36ab1daa8",
+      "namespace": "prometheus",
+      "node": "172.28.232.128:9100",
+      "path_checker_state": "faulty",
+      "pod": "kube-prometheus-stack-prometheus-node-exporter-ftf8w",
+      "prometheus": "prometheus/kube-prometheus-stack-prometheus",
+      "protocol": "scsi:iscsi",
+      "service": "kube-prometheus-stack-prometheus-node-exporter",
+      "severity": "critical",
+      "size": "20G",
+      "vendor": "IET,VIRTUAL-DISK",
+      "volume_id": "3f2cd71e-6618-43a9-9ce2-79b36ab1daa8"
+    }
+  },
+  {
+    "annotations": {
+      "description": "\nlabels: map[__name__:node_dmpath_info container:node-exporter device:sdc device_mapper_state:failed device_state:running dm_dev:8:32 endpoint:http-metrics hcil:8:0:0:1 init_st:ok instance:172.28.232.124:9100 interface_ip:[undef] job:node-exporter marginal_st:normal multipath_id:36bea04cbd04b1e08f6906dd5236b9fd7 namespace:prometheus path_checker_state:faulty pod:kube-prometheus-stack-prometheus-node-exporter-rmhm5 protocol:scsi:iscsi service:kube-prometheus-stack-prometheus-node-exporter size:20G vendor:IET,VIRTUAL-DISK volume_id:6d0b6bea-4cbd-4b1e-8f69-6dd5236b9fd7]",
+      "summary": "Multipathd paths are NOT active|ready and paths are likely orphaned"
+    },
+    "endsAt": "2025-08-12T21:39:55.148Z",
+    "fingerprint": "8c50fa490bbdcf04",
+    "receivers": [
+      {
+        "name": "all_alerts_receiver"
+      },
+      {
+        "name": "alert_proxy_alerts_receiver"
+      },
+      {
+        "name": "msteams_config"
+      }
+    ],
+    "startsAt": "2025-08-12T01:37:25.148Z",
+    "status": {
+      "inhibitedBy": [],
+      "silencedBy": [],
+      "state": "active"
+    },
+    "updatedAt": "2025-08-12T21:35:55.158Z",
+    "generatorURL": "http://kube-prometheus-stack-prometheus.prometheus:9090/graph?g0.expr=node_dmpath_info%7Bpath_checker_state%21~%22active%7Cready%22%7D&g0.tab=1",
+    "labels": {
+      "alertname": "NodeDmpathInfoMultipathCritical",
+      "container": "node-exporter",
+      "device": "sdc",
+      "device_mapper_state": "failed",
+      "device_state": "running",
+      "dm_dev": "8:32",
+      "endpoint": "http-metrics",
+      "hcil": "8:0:0:1",
+      "init_st": "ok",
+      "instance": "172.28.232.124:9100",
+      "interface_ip": "[undef]",
+      "job": "node-exporter",
+      "marginal_st": "normal",
+      "multipath_id": "36bea04cbd04b1e08f6906dd5236b9fd7",
+      "namespace": "prometheus",
+      "node": "172.28.232.124:9100",
+      "path_checker_state": "faulty",
+      "pod": "kube-prometheus-stack-prometheus-node-exporter-rmhm5",
+      "prometheus": "prometheus/kube-prometheus-stack-prometheus",
+      "protocol": "scsi:iscsi",
+      "service": "kube-prometheus-stack-prometheus-node-exporter",
+      "severity": "critical",
+      "size": "20G",
+      "vendor": "IET,VIRTUAL-DISK",
+      "volume_id": "6d0b6bea-4cbd-4b1e-8f69-6dd5236b9fd7"
+    }
+  },
+  {
+    "annotations": {
+      "description": "\nController: 0\nSlot: 1\nlabels: map[__name__:megaraid_pd_other_errors container:node-exporter controller:0 enclosure:64 endpoint:http-metrics instance:172.28.232.105:9100 job:node-exporter namespace:prometheus pod:kube-prometheus-stack-prometheus-node-exporter-lfcb9 service:kube-prometheus-stack-prometheus-node-exporter slot:1]",
+      "summary": "DELL megaraid physical disk media errors detected"
+    },
+    "endsAt": "2025-08-12T21:39:56.465Z",
+    "fingerprint": "d569ffdb4a26aea3",
+    "receivers": [
+      {
+        "name": "msteams_config"
+      }
+    ],
+    "startsAt": "2025-08-11T15:13:26.465Z",
+    "status": {
+      "inhibitedBy": [],
+      "silencedBy": [],
+      "state": "active"
+    },
+    "updatedAt": "2025-08-12T21:35:56.470Z",
+    "generatorURL": "http://kube-prometheus-stack-prometheus.prometheus:9090/graph?g0.expr=%28megaraid_pd_other_errors%7Bjob%3D%22node-exporter%22%7D+%3E+5+and+megaraid_pd_media_errors%7Bjob%3D%22node-exporter%22%7D+and+megaraid_pd_predictive_errors%7Bjob%3D%22node-exporter%22%7D%29+%3E+0&g0.tab=1",
+    "labels": {
+      "alertname": "MegaraidPdPredictiveMediaErrorsInfo",
+      "container": "node-exporter",
+      "controller": "0",
+      "enclosure": "64",
+      "endpoint": "http-metrics",
+      "instance": "172.28.232.105:9100",
+      "job": "node-exporter",
+      "namespace": "prometheus",
+      "node": "172.28.232.105:9100",
+      "pod": "kube-prometheus-stack-prometheus-node-exporter-lfcb9",
+      "prometheus": "prometheus/kube-prometheus-stack-prometheus",
+      "service": "kube-prometheus-stack-prometheus-node-exporter",
+      "severity": "info",
+      "slot": "1"
+    }
+  },
+  {
+    "annotations": {
+      "description": "\nController: 0\nSlot: 0\nlabels: map[__name__:megaraid_pd_other_errors container:node-exporter controller:0 enclosure:64 endpoint:http-metrics instance:172.28.232.105:9100 job:node-exporter namespace:prometheus pod:kube-prometheus-stack-prometheus-node-exporter-lfcb9 service:kube-prometheus-stack-prometheus-node-exporter slot:0]",
+      "summary": "DELL megaraid physical disk media errors detected"
+    },
+    "endsAt": "2025-08-12T21:39:56.465Z",
+    "fingerprint": "d56dffdb4a2a977a",
+    "receivers": [
+      {
+        "name": "msteams_config"
+      }
+    ],
+    "startsAt": "2025-08-11T15:13:26.465Z",
+    "status": {
+      "inhibitedBy": [],
+      "silencedBy": [],
+      "state": "active"
+    },
+    "updatedAt": "2025-08-12T21:35:56.470Z",
+    "generatorURL": "http://kube-prometheus-stack-prometheus.prometheus:9090/graph?g0.expr=%28megaraid_pd_other_errors%7Bjob%3D%22node-exporter%22%7D+%3E+5+and+megaraid_pd_media_errors%7Bjob%3D%22node-exporter%22%7D+and+megaraid_pd_predictive_errors%7Bjob%3D%22node-exporter%22%7D%29+%3E+0&g0.tab=1",
+    "labels": {
+      "alertname": "MegaraidPdPredictiveMediaErrorsInfo",
+      "container": "node-exporter",
+      "controller": "0",
+      "enclosure": "64",
+      "endpoint": "http-metrics",
+      "instance": "172.28.232.105:9100",
+      "job": "node-exporter",
+      "namespace": "prometheus",
+      "node": "172.28.232.105:9100",
+      "pod": "kube-prometheus-stack-prometheus-node-exporter-lfcb9",
+      "prometheus": "prometheus/kube-prometheus-stack-prometheus",
+      "service": "kube-prometheus-stack-prometheus-node-exporter",
+      "severity": "info",
+      "slot": "0"
+    }
+  },
+  {
+    "annotations": {
+      "description": "\nlabels: map[__name__:node_dmpath_info container:node-exporter device:sdb device_mapper_state:failed device_state:running dm_dev:8:16 endpoint:http-metrics hcil:1:0:0:1 init_st:ok instance:172.28.232.122:9100 interface_ip:[undef] job:node-exporter marginal_st:normal multipath_id:368820461904cc90b1600c6565c971dec namespace:prometheus path_checker_state:faulty pod:kube-prometheus-stack-prometheus-node-exporter-9qht4 protocol:scsi:iscsi service:kube-prometheus-stack-prometheus-node-exporter size:20G vendor:IET,VIRTUAL-DISK volume_id:7292a882-4619-4cc9-b160-c6565c971dec]",
+      "summary": "Multipathd paths are NOT active|ready and paths are likely orphaned"
+    },
+    "endsAt": "2025-08-12T21:39:25.148Z",
+    "fingerprint": "d6df20a020b91098",
+    "receivers": [
+      {
+        "name": "all_alerts_receiver"
+      },
+      {
+        "name": "alert_proxy_alerts_receiver"
+      },
+      {
+        "name": "msteams_config"
+      }
+    ],
+    "startsAt": "2025-08-12T20:32:25.148Z",
+    "status": {
+      "inhibitedBy": [],
+      "silencedBy": [],
+      "state": "active"
+    },
+    "updatedAt": "2025-08-12T21:35:25.155Z",
+    "generatorURL": "http://kube-prometheus-stack-prometheus.prometheus:9090/graph?g0.expr=node_dmpath_info%7Bpath_checker_state%21~%22active%7Cready%22%7D&g0.tab=1",
+    "labels": {
+      "alertname": "NodeDmpathInfoMultipathCritical",
+      "container": "node-exporter",
+      "device": "sdb",
+      "device_mapper_state": "failed",
+      "device_state": "running",
+      "dm_dev": "8:16",
+      "endpoint": "http-metrics",
+      "hcil": "1:0:0:1",
+      "init_st": "ok",
+      "instance": "172.28.232.122:9100",
+      "interface_ip": "[undef]",
+      "job": "node-exporter",
+      "marginal_st": "normal",
+      "multipath_id": "368820461904cc90b1600c6565c971dec",
+      "namespace": "prometheus",
+      "node": "172.28.232.122:9100",
+      "path_checker_state": "faulty",
+      "pod": "kube-prometheus-stack-prometheus-node-exporter-9qht4",
+      "prometheus": "prometheus/kube-prometheus-stack-prometheus",
+      "protocol": "scsi:iscsi",
+      "service": "kube-prometheus-stack-prometheus-node-exporter",
+      "severity": "critical",
+      "size": "20G",
+      "vendor": "IET,VIRTUAL-DISK",
+      "volume_id": "7292a882-4619-4cc9-b160-c6565c971dec"
+    }
+  },
+  {
+    "annotations": {
+      "description": "There are 2 Cinder volumes in error state.\nLABELS: map[__name__:openstack_cinder_volume_status_counter container:openstack-exporter endpoint:metrics instance:default job:os-metrics-prometheus-openstack-exporter namespace:openstack pod:os-metrics-prometheus-openstack-exporter-8658f7d65d-nj9f4 service:os-metrics-prometheus-openstack-exporter status:error]",
+      "summary": "There are 2 Cinder volumes in error state"
+    },
+    "endsAt": "2025-08-12T21:40:32.568Z",
+    "fingerprint": "da47c61730fa7f62",
+    "receivers": [
+      {
+        "name": "all_alerts_receiver"
+      },
+      {
+        "name": "alert_proxy_alerts_receiver"
+      },
+      {
+        "name": "msteams_config"
+      }
+    ],
+    "startsAt": "2025-08-12T21:33:32.568Z",
+    "status": {
+      "inhibitedBy": [],
+      "silencedBy": [],
+      "state": "active"
+    },
+    "updatedAt": "2025-08-12T21:36:32.571Z",
+    "generatorURL": "http://kube-prometheus-stack-prometheus.prometheus:9090/graph?g0.expr=openstack_cinder_volume_status_counter%7Bjob%3D%22os-metrics-prometheus-openstack-exporter%22%2Cstatus%3D%22error%22%7D+%3E+0&g0.tab=1",
+    "labels": {
+      "alertname": "CinderVolumeStatusErrorCounterWarning",
+      "container": "openstack-exporter",
+      "endpoint": "metrics",
+      "instance": "default",
+      "job": "os-metrics-prometheus-openstack-exporter",
+      "namespace": "openstack",
+      "pod": "os-metrics-prometheus-openstack-exporter-8658f7d65d-nj9f4",
+      "prometheus": "prometheus/kube-prometheus-stack-prometheus",
+      "service": "os-metrics-prometheus-openstack-exporter",
+      "severity": "warning",
+      "status": "error"
+    }
+  },
+  {
+    "annotations": {
+      "description": "Cinder volume ID: 540e4ee3-0698-4dcd-9a4b-fc8af83d6831\nNAME: s_rally_b59627b5_MVNbT6nH\nLABELS: map[__name__:openstack_cinder_volume_status bootable:false container:openstack-exporter endpoint:metrics id:540e4ee3-0698-4dcd-9a4b-fc8af83d6831 instance:default job:os-metrics-prometheus-openstack-exporter name:s_rally_b59627b5_MVNbT6nH namespace:openstack pod:os-metrics-prometheus-openstack-exporter-8658f7d65d-nj9f4 service:os-metrics-prometheus-openstack-exporter size:20 status:error_deleting tenant_id:197b550806bd497e8a230816dbf5f802 volume_type:Standard]",
+      "summary": "Cinder volume with status == error_deleting"
+    },
+    "endsAt": "2025-08-12T21:40:32.568Z",
+    "fingerprint": "dcc5c3b40606486e",
+    "receivers": [
+      {
+        "name": "all_alerts_receiver"
+      },
+      {
+        "name": "alert_proxy_alerts_receiver"
+      },
+      {
+        "name": "msteams_config"
+      }
+    ],
+    "startsAt": "2025-08-12T21:33:32.568Z",
+    "status": {
+      "inhibitedBy": [],
+      "silencedBy": [],
+      "state": "active"
+    },
+    "updatedAt": "2025-08-12T21:36:32.572Z",
+    "generatorURL": "http://kube-prometheus-stack-prometheus.prometheus:9090/graph?g0.expr=%28openstack_cinder_volume_status%7Bjob%3D%22os-metrics-prometheus-openstack-exporter%22%2Cstatus%3D%22error_deleting%22%7D+offset+4m%29+and+openstack_cinder_volume_status%7Bjob%3D%22os-metrics-prometheus-openstack-exporter%22%2Cstatus%3D%22error_deleting%22%7D&g0.tab=1",
+    "labels": {
+      "alertname": "CinderVolumeStatusErrorDeletingWarning",
+      "bootable": "false",
+      "container": "openstack-exporter",
+      "endpoint": "metrics",
+      "id": "540e4ee3-0698-4dcd-9a4b-fc8af83d6831",
+      "instance": "default",
+      "job": "os-metrics-prometheus-openstack-exporter",
+      "name": "s_rally_b59627b5_MVNbT6nH",
+      "namespace": "openstack",
+      "pod": "os-metrics-prometheus-openstack-exporter-8658f7d65d-nj9f4",
+      "prometheus": "prometheus/kube-prometheus-stack-prometheus",
+      "service": "os-metrics-prometheus-openstack-exporter",
+      "severity": "warning",
+      "size": "20",
+      "status": "error_deleting",
+      "tenant_id": "197b550806bd497e8a230816dbf5f802",
+      "volume_type": "Standard"
+    }
+  },
+  {
+    "annotations": {
+      "description": "There are 1 Cinder volumes in error_deleting state.\nLABELS: map[]",
+      "summary": "There are 1 Cinder volumes in error_deleting state"
+    },
+    "endsAt": "2025-08-12T21:40:32.568Z",
+    "fingerprint": "e80f511c2db81992",
+    "receivers": [
+      {
+        "name": "all_alerts_receiver"
+      },
+      {
+        "name": "alert_proxy_alerts_receiver"
+      },
+      {
+        "name": "msteams_config"
+      }
+    ],
+    "startsAt": "2025-08-12T21:33:32.568Z",
+    "status": {
+      "inhibitedBy": [],
+      "silencedBy": [],
+      "state": "active"
+    },
+    "updatedAt": "2025-08-12T21:36:32.571Z",
+    "generatorURL": "http://kube-prometheus-stack-prometheus.prometheus:9090/graph?g0.expr=count%28%28openstack_cinder_volume_status%7Bstatus%3D%22error_deleting%22%7D+offset+4m%29+and+openstack_cinder_volume_status%7Bjob%3D%22os-metrics-prometheus-openstack-exporter%22%2Cstatus%3D%22error_deleting%22%7D%29+%3E%3D+0&g0.tab=1",
+    "labels": {
+      "alertname": "CinderVolumeStatusErrorDeletingCountWarning",
+      "prometheus": "prometheus/kube-prometheus-stack-prometheus",
+      "severity": "warning"
+    }
+  },
+  {
+    "annotations": {
+      "description": "This is an alert meant to ensure that the entire alerting pipeline is functional.\nThis alert is always firing, therefore it should always be firing in Alertmanager\nand always fire against a receiver. There are integrations with various notification\nmechanisms that send a notification when this alert is not firing. For example the\n\"DeadMansSnitch\" integration in PagerDuty.\n",
+      "runbook_url": "https://runbooks.prometheus-operator.dev/runbooks/general/watchdog",
+      "summary": "An alert that should always be firing to certify that Alertmanager is working properly."
+    },
+    "endsAt": "2025-08-12T21:39:07.188Z",
+    "fingerprint": "f9c405c23905f0f1",
+    "receivers": [
+      {
+        "name": "null"
+      }
+    ],
+    "startsAt": "2025-08-01T14:18:37.188Z",
+    "status": {
+      "inhibitedBy": [],
+      "silencedBy": [],
+      "state": "active"
+    },
+    "updatedAt": "2025-08-12T21:35:07.203Z",
+    "generatorURL": "http://kube-prometheus-stack-prometheus.prometheus:9090/graph?g0.expr=vector%281%29&g0.tab=1",
+    "labels": {
+      "alertname": "Watchdog",
+      "prometheus": "prometheus/kube-prometheus-stack-prometheus",
+      "rackspace_com_coreAccountID": "5002029",
+      "rackspace_com_overseerID": "935811",
+      "severity": "none"
+    }
+  },
+  {
+    "annotations": {
+      "description": "\nlabels: map[__name__:node_dmpath_info container:node-exporter device:sdd device_mapper_state:failed device_state:running dm_dev:8:48 endpoint:http-metrics hcil:3:0:0:1 init_st:ok instance:172.28.232.128:9100 interface_ip:[undef] job:node-exporter marginal_st:normal multipath_id:361de0323904507087900d1911c8f98d8 namespace:prometheus path_checker_state:faulty pod:kube-prometheus-stack-prometheus-node-exporter-ftf8w protocol:scsi:iscsi service:kube-prometheus-stack-prometheus-node-exporter size:20G vendor:IET,VIRTUAL-DISK volume_id:00ea21de-3239-4507-8790-d1911c8f98d8]",
+      "summary": "Multipathd paths are NOT active|ready and paths are likely orphaned"
+    },
+    "endsAt": "2025-08-12T21:39:55.148Z",
+    "fingerprint": "fff2a1453f269307",
+    "receivers": [
+      {
+        "name": "all_alerts_receiver"
+      },
+      {
+        "name": "alert_proxy_alerts_receiver"
+      },
+      {
+        "name": "msteams_config"
+      }
+    ],
+    "startsAt": "2025-08-12T03:52:25.148Z",
+    "status": {
+      "inhibitedBy": [],
+      "silencedBy": [],
+      "state": "active"
+    },
+    "updatedAt": "2025-08-12T21:35:55.158Z",
+    "generatorURL": "http://kube-prometheus-stack-prometheus.prometheus:9090/graph?g0.expr=node_dmpath_info%7Bpath_checker_state%21~%22active%7Cready%22%7D&g0.tab=1",
+    "labels": {
+      "alertname": "NodeDmpathInfoMultipathCritical",
+      "container": "node-exporter",
+      "device": "sdd",
+      "device_mapper_state": "failed",
+      "device_state": "running",
+      "dm_dev": "8:48",
+      "endpoint": "http-metrics",
+      "hcil": "3:0:0:1",
+      "init_st": "ok",
+      "instance": "172.28.232.128:9100",
+      "interface_ip": "[undef]",
+      "job": "node-exporter",
+      "marginal_st": "normal",
+      "multipath_id": "361de0323904507087900d1911c8f98d8",
+      "namespace": "prometheus",
+      "node": "172.28.232.128:9100",
+      "path_checker_state": "faulty",
+      "pod": "kube-prometheus-stack-prometheus-node-exporter-ftf8w",
+      "prometheus": "prometheus/kube-prometheus-stack-prometheus",
+      "protocol": "scsi:iscsi",
+      "service": "kube-prometheus-stack-prometheus-node-exporter",
+      "severity": "critical",
+      "size": "20G",
+      "vendor": "IET,VIRTUAL-DISK",
+      "volume_id": "00ea21de-3239-4507-8790-d1911c8f98d8"
+    }
+  }
+]
