@@ -29,7 +29,6 @@ class ProcessAlert(MethodView):
 
         if response.status_code == 200:
             alerts = response.json()
-            current_app.logger.debug(f"matching_alert: { alerts }")
             if not alerts:
                 current_app.logger.info(f"No alerts returned by { AlertProxyConfig.AM_V2_BASE_URL }")
                 return is_firing
@@ -40,7 +39,7 @@ class ProcessAlert(MethodView):
         else:
             current_app.logger.error(f"Failed to retrieve alerts. Status code: {response.status_code}")
 
-        if alert_status == 'firing':
+        if alert_status == 'active':
             is_firing = True
         return is_firing
 
@@ -84,7 +83,6 @@ class ProcessAlert(MethodView):
 
         if content_type == 'application/json':
             alert_data = request.get_json(silent=True)
-            current_app.logger.error(f"alert_data: { alert_data } alert_data.get('commonAnnotations'): {alert_data.get('commonAnnotations')} alert_data.get('commonLabels'): {alert_data.get('commonLabels')}")
             if not alert_data or not (alert_data.get('commonAnnotations') or
                                        alert_data.get('commonLabels')):
                 current_app.logger.error(f"Invalid or missing json payload")
@@ -102,19 +100,22 @@ class ProcessAlert(MethodView):
             request_id = request.environ.get("HTTP_X_REQUEST_ID")
 
         # set some values or defaults if not defined
-        a_status = alert_data.get('status', 'OK')
+        a_status = "ALARM" if alert_data['status'] == "firing" else "OK" if alert_data['status'] == "resolved" else "OK"
         a_subject = alert_data['commonAnnotations'].get('summary', 'SUMMARY')
         a_description = alert_data['commonAnnotations'].get('description', 'DESCRIPTION')
         a_oversserID = alert_data['commonLabels'].get('oversserID', AlertProxyConfig.CORE_OVERSEER_ID)
         a_coreAccountID = alert_data['commonLabels'].get('coreAccountID', AlertProxyConfig.CORE_ACCOUNT_ID)
         a_secret = AlertProxyConfig.ACCOUNT_SECRET
+        a_name = alert_data['commonLabels'].get('alertname', "NONE")
+
 
         alerts = alert_data.get('alerts', [])
-        current_app.logger.info(f"Processing { len(alerts) } alerts...")
+        current_app.logger.info(f"Received alert dump.  Total number of alerts to process: { len(alerts) }")
         count = 0;
         for alert in alerts:
             count += 1
             a_fingerprint = alert.get('fingerprint','UNKNOWN')
+            a_severity = alert.get('severity', 'warning')
             current_app.logger.info(f"Processing { count } of { len(alerts) } ...")
             alert['labels']['request-id'] = request_id
             current_app.logger.debug(f"Alert { count } payload: { alert }")
@@ -122,38 +123,42 @@ class ProcessAlert(MethodView):
                 if self._is_alert_still_firing(a_fingerprint):
                     current_app.logger.info(f"Alert with fingerprint: { a_fingerprint } is still firing. creating ticket...")
                 else:
-                    current_app.logger.info(f"Alert is either 'active' or 'resolved'. skipping ticket creation.")
+                    current_app.logger.info(f"Alert with fingerprint: { a_fingerprint } is not active. skipping ticket creation.")
                     continue
             current_app.logger.info(f"Formatting alert for watchman ingestion")
-            w_url = f"https;//watchman.api.manage.rackspace.com/v1/hybrid:{ a_coreAccountID }/webihook/platformservices?secret={ a_secret }"
+            if a_severity == "warning":
+                w_url = f"https://watchman.api.manage.rackspace.com/v1/hybrid:{ a_coreAccountID }/webhook/platformservices?secret={ a_secret }&severity=low"
+            else:
+                w_url = f"https://watchman.api.manage.rackspace.com/v1/hybrid:{ a_coreAccountID }/webhook/platformservices?secret={ a_secret }&severity=high"
             w_headers = {
                     "Accept": "application/json",
                     "Content-Type": "application/json"
             }
-            w_body = f"""f"Severity: Standard
+            w_body = f"""Severity: { a_severity }
 Instance: { alert.get('labels', {}).get('instance','UNKNOWN') }
-coreDeviceID: { alert.get('coreDeviceID', 'UNKNWON') } 
+coreDeviceID: { alert.get('coreDeviceID', 'UNKNWON') }
 coreAccountID: { a_coreAccountID }
+overseerID: { a_overseerID }
 Description: { a_description }
 Started at: { alert.get('startsAt','UNKNOWN') }
-NOTE: NO ACTION NEEDED, THIS IS FOR ALERTMANGER->CORE Ticket creation testing.  (chris.breu)
+Suppression Link: { AlertProxyConfig.AM_V2_BASE_URL }/#/alerts?filter=%7Balertname%3D%22{ a_name }%22%2C%20rackspace_com_coreAccountID%3D%225002029%22%2C%20rackspace_com_overseerID%3D%22935811%22%2C%20severity%3D%22{ a_severity }%22%7D
 """
             w_payload = {
-                "subject": f"PROXY-{ a_subject }",
+                "subject": f"ALERT-PROXY-{ a_subject }",
                 "body": w_body,
                 "privateComment": "\n".join([f"{x}:{v}" for x, v in alert.get('labels').items()]),
                 "alarmState": a_status,
-                "threadId": f"platformservices-{ a_coreAccountID }-brew",
-                "sender": ""
+                "threadId": f"{ a_coreAccountID }-{ a_fingerprint }",
+                "sender": "alert-proxy"
             }
             # post the payload against watchman
             try:
-                current_app.logger.debug(f"Payload: {w_payload}")
+                response = self._create_core_ticket(w_url, w_headers, w_payload)
+#                current_app.logger.debug(f"RESPONSE: { response }")
             except Exception as e:
                 current_app.logged.error(f"Uncaught error: {str(e)}")
                 continue
         current_app.logger.info(f"END alert processing...")
         return jsonify({"message": f"success: true"}), 201
-
 
 process_alert_bp.add_url_rule('/process', view_func=ProcessAlert.as_view('alert_api'), strict_slashes=False)
