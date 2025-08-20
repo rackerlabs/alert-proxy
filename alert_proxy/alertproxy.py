@@ -9,13 +9,12 @@
 from flask import Flask, jsonify
 from flask_request_id_header.middleware import RequestID
 from config.logger import AlertProxyLogger
-from config.config import AlertProxyConfig
+from config.config import settings
 
 def create_app():
     # create the app from config.py
     app = Flask(__name__)
     app.config['REQUEST_ID_UNIQUE_VALUE_PREFIX'] = 'PXY-'
-    app.config.from_object(AlertProxyConfig)
 
     # configure the logger
     app_logger_instance = AlertProxyLogger(app)
@@ -37,4 +36,4 @@ def create_app():
 
 if __name__ == '__main__':
     app = create_app()
-    app.run(debug=AlertProxyConfig.APP_DEBUG)
+    app.run(debug=settings.app_debug)
