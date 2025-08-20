@@ -12,7 +12,6 @@ data:
     # as ConfigMaps are not encrypted. Consider using Kubernetes Secrets directly via mounted files or envFrom.
     ---
     debug: {{ .Values.config.debug }}
-    testing: {{ .Values.config.testing }}
     app_debug: {{ .Values.config.app_debug }}
     # Logging
     logging:

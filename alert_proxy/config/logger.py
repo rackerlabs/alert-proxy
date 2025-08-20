@@ -7,7 +7,7 @@
 #                    Alert-Proxy             __/ |
 #                                           |___/
 from flask import request, has_request_context
-from config.config import AlertProxyConfig
+from config.config import settings
 import logging
 import os
 
@@ -24,9 +24,9 @@ class AlertProxyLogger:
     def __init__(self, app):
         self.app = app
         # Construct the full log file path
-        self.log_dir = AlertProxyConfig.LOG_DIR
-        self.log_file = AlertProxyConfig.LOG_FILE_NAME
-        self.level = AlertProxyConfig.LOG_LEVEL
+        self.log_dir = settings.logging.log_dir
+        self.log_file = settings.logging.log_file_name
+        self.level = settings.logging.log_level
         self.log_path = os.path.join(self.log_dir, self.log_file)
         self._configure_logger()
 

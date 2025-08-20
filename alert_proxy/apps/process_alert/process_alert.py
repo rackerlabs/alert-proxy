@@ -9,7 +9,7 @@
 from flask.views import MethodView
 from flask import Blueprint, request, jsonify, current_app, has_request_context
 #, has_request_context
-from config.config import AlertProxyConfig
+from config.config import settings
 import requests
 import json
 from apps.process_alert import process_alert_bp
@@ -25,12 +25,12 @@ class ProcessAlert(MethodView):
         alert_status = None
         is_firing = False
 
-        response = requests.get(AlertProxyConfig.AM_V2_BASE_URL)
+        response = requests.get(settings.alert_proxy_config.am_v2_base_url)
 
         if response.status_code == 200:
             alerts = response.json()
             if not alerts:
-                current_app.logger.info(f"No alerts returned by { AlertProxyConfig.AM_V2_BASE_URL }")
+                current_app.logger.info(f"No alerts returned by { settings.alert_proxy_config.am_v2_base_url }")
                 return is_firing
             for alert in alerts:
                 if alert['fingerprint'] == fingerprint:
@@ -100,13 +100,13 @@ class ProcessAlert(MethodView):
             request_id = request.environ.get("HTTP_X_REQUEST_ID")
 
         # set some values or defaults if not defined
+        a_name = alert_data['commonLabels'].get('alertname', "NONE")
         a_status = "ALARM" if alert_data['status'] == "firing" else "OK" if alert_data['status'] == "resolved" else "OK"
         a_subject = alert_data['commonAnnotations'].get('summary', 'SUMMARY')
         a_description = alert_data['commonAnnotations'].get('description', 'DESCRIPTION')
-        a_oversserID = alert_data['commonLabels'].get('oversserID', AlertProxyConfig.CORE_OVERSEER_ID)
-        a_coreAccountID = alert_data['commonLabels'].get('coreAccountID', AlertProxyConfig.CORE_ACCOUNT_ID)
-        a_secret = AlertProxyConfig.ACCOUNT_SECRET
-        a_name = alert_data['commonLabels'].get('alertname', "NONE")
+        a_oversserID = alert_data['commonLabels'].get('oversserID', settings.alert_proxy_config.core_overseer_id)
+        a_coreAccountID = alert_data['commonLabels'].get('coreAccountID', settings.alert_proxy_config.account_secret)
+        a_secret = settings.alert_proxy_config.account_secret
 
 
         alerts = alert_data.get('alerts', [])
@@ -119,7 +119,7 @@ class ProcessAlert(MethodView):
             current_app.logger.info(f"Processing { count } of { len(alerts) } ...")
             alert['labels']['request-id'] = request_id
             current_app.logger.debug(f"Alert { count } payload: { alert }")
-            if AlertProxyConfig.ALERT_VERIFICATION:
+            if settings.alert_proxy_config.alert_verification:
                 if self._is_alert_still_firing(a_fingerprint):
                     current_app.logger.info(f"Alert with fingerprint: { a_fingerprint } is still firing. creating ticket...")
                 else:
@@ -141,7 +141,7 @@ coreAccountID: { a_coreAccountID }
 overseerID: { a_overseerID }
 Description: { a_description }
 Started at: { alert.get('startsAt','UNKNOWN') }
-Suppression Link: { AlertProxyConfig.AM_V2_BASE_URL }/#/alerts?filter=%7Balertname%3D%22{ a_name }%22%2C%20rackspace_com_coreAccountID%3D%225002029%22%2C%20rackspace_com_overseerID%3D%22935811%22%2C%20severity%3D%22{ a_severity }%22%7D
+Suppression Link: { settings.alert_proxy_config.am_v2_base_url }/#/alerts?filter=%7Balertname%3D%22{ a_name }%22%2C%20rackspace_com_coreAccountID%3D%22{ a_coreAccountID }%22%2C%20rackspace_com_overseerID%3D%22{ a_overseerID }%22%2C%20severity%3D%22{ a_severity }%22%7D
 """
             w_payload = {
                 "subject": f"ALERT-PROXY-{ a_subject }",
@@ -156,7 +156,7 @@ Suppression Link: { AlertProxyConfig.AM_V2_BASE_URL }/#/alerts?filter=%7Balertna
                 response = self._create_core_ticket(w_url, w_headers, w_payload)
 #                current_app.logger.debug(f"RESPONSE: { response }")
             except Exception as e:
-                current_app.logged.error(f"Uncaught error: {str(e)}")
+                current_app.logger.error(f"Uncaught error: {str(e)}")
                 continue
         current_app.logger.info(f"END alert processing...")
         return jsonify({"message": f"success: true"}), 201
