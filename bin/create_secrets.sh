@@ -1,5 +1,12 @@
 #!/bin/bash
-
+#   ___  _           _  ______
+#  / _ \| |         | | | ___ \
+# / /_\ \ | ___ _ __| |_| |_/ / __ _____  ___   _
+# |  _  | |/ _ \ '__| __|  __/ '__/ _ \ \/ / | | |
+# | | | | |  __/ |  | |_| |  | | | (_) >  <| |_| |
+# \_| |_/_|\___|_|   \__\_|  |_|  \___/_/\_\\__, |
+#                    Alert-Proxy             __/ |
+#                                           |___/
 # This script creates individual Kubernetes Secrets for each sensitive value,
 # matching the format expected by the Helm chart's values.yaml.
 

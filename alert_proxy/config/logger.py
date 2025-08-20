@@ -54,7 +54,7 @@ class AlertProxyLogger:
 
         # Add the file handler to the app's logger
         self.app.logger.addHandler(file_handler)
-        self.app.logger.propagate = False 
+        self.app.logger.propagate = False
 
     def debug(self, message, *args, **kwargs):
         self.app.logger.debug(message, *args, **kwargs)
