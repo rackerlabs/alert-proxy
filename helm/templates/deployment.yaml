@@ -1,11 +1,3 @@
-#   ___  _           _  ______
-#  / _ \| |         | | | ___ \
-# / /_\ \ | ___ _ __| |_| |_/ / __ _____  ___   _
-# |  _  | |/ _ \ '__| __|  __/ '__/ _ \ \/ / | | |
-# | | | | |  __/ |  | |_| |  | | | (_) >  <| |_| |
-# \_| |_/_|\___|_|   \__\_|  |_|  \___/_/\_\\__, |
-#                    Alert-Proxy             __/ |
-#                                           |___/
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -53,7 +45,8 @@ spec:
       containers:
       - name: ubuntu
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-        command: ["/bin/bash", "-c", "while true; do sleep 3600; done"]
+        command: ["python"]
+        args: ["/opt/alert-proxy/alert_proxy/process_alert.py", "--config", "/opt/alert-proxy/config/config.yaml"]
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         {{- with .Values.securityContext }}
         securityContext:

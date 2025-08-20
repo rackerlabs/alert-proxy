@@ -7,9 +7,6 @@
 # \_| |_/_|\___|_|   \__\_|  |_|  \___/_/\_\\__, |
 #                    Alert-Proxy             __/ |
 #                                           |___/
-# This script creates individual Kubernetes Secrets for each sensitive value,
-# matching the format expected by the Helm chart's values.yaml.
-
 NAMESPACE="rackspace"
 
 # Ensure the namespace exists
@@ -34,7 +31,6 @@ type: Opaque
 data:
   core_account_number: $(echo -n "$CORE_ACCOUNT_NUMBER" | base64 -w0)
 EOF
-echo "Secret 'core-account-id-secret' created."
 
 # Create overseer-core-device-id-secret
 cat <<EOF | kubectl apply -f -
@@ -47,33 +43,31 @@ type: Opaque
 data:
   overseer_core_device_id: $(echo -n "$OVERSEER_CORE_DEVICE_ID" | base64 -w0)
 EOF
-echo "Secret 'overseer-core-device-id-secret' created."
 
 # Create accountServiceToken-secret
 cat <<EOF | kubectl apply -f -
 apiVersion: v1
 kind: Secret
 metadata:
-  name: accountServiceToken-secret
+  # CORRECTED: Name must be all lowercase as per RFC 1123 and values.yaml
+  name: account-service-token-secret
   namespace: $NAMESPACE
 type: Opaque
 data:
   account_service_token: $(echo -n "$ACCOUNT_SERVICE_TOKEN" | base64 -w0)
 EOF
-echo "Secret 'accountServiceToken-secret' created."
 
 # Create alertManagerBaseUrl-secret
 cat <<EOF | kubectl apply -f -
 apiVersion: v1
 kind: Secret
 metadata:
-  name: alertManagerBaseUrl-secret
+  # CORRECTED: Name must be all lowercase as per RFC 1123 and values.yaml
+  name: alert-manager-base-url-secret
   namespace: $NAMESPACE
 type: Opaque
 data:
   alert_manager_base_url: $(echo -n "$ALERT_MANAGER_BASE_URL" | base64 -w0)
 EOF
-echo "Secret 'alertManagerBaseUrl-secret' created."
 
 echo "All secrets have been created in the '$NAMESPACE' namespace."
-

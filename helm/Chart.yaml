@@ -1,18 +1,10 @@
-#   ___  _           _  ______
-#  / _ \| |         | | | ___ \
-# / /_\ \ | ___ _ __| |_| |_/ / __ _____  ___   _
-# |  _  | |/ _ \ '__| __|  __/ '__/ _ \ \/ / | | |
-# | | | | |  __/ |  | |_| |  | | | (_) >  <| |_| |
-# \_| |_/_|\___|_|   \__\_|  |_|  \___/_/\_\\__, |
-#                    Alert-Proxy             __/ |
-#                                           |___/
 apiVersion: v2
-appVersion: "1.0.0"
+appVersion: "0.1.0"
 description: Rackspace OpenStack Alert Proxy
 name: alert-proxy
 sources:
   - https://github.com/rackerlabs/alert-proxy
-version: 0.1.0
+version: 0.0.1
 type: application
 maintainers:
   - name: Rackspace Technology
