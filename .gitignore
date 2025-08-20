@@ -9,4 +9,4 @@
 venv/
 .venv/
 *__pycache__*
-logs/*
+alert_proxy/logs/*
