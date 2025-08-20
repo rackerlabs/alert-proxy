@@ -1,0 +1,10 @@
+apiVersion: v2
+appVersion: "1.0.0"
+description: Rackspace OpenStack Alert Proxy
+name: alert-proxy
+sources:
+  - https://github.com/rackerlabs/alert-proxy
+version: 0.1.0
+type: application
+maintainers:
+  - name: Rackspace Technology
