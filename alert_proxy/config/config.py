@@ -39,5 +39,5 @@ class Config:
             else:
                 setattr(self, key, value)
 
-AlertProxyConfig = Config()
+settings = Config()
 
