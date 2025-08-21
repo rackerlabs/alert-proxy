@@ -8,7 +8,6 @@
 #                                           |___/
 from flask.views import MethodView
 from flask import Blueprint, request, jsonify, current_app, has_request_context
-#, has_request_context
 from config.config import settings
 import requests
 import json
@@ -62,12 +61,11 @@ class ProcessAlert(MethodView):
 
     def get(self):
         """
-        Generic get endpoint action that will return a 200.  For use with liveness probes
-        Args: NONE
+        Generic GET endpoint action that will return a 200.
+        Designed for Kubernetes liveness and readiness probes.
         """
-        current_app.logger.info("GET request accepted")
-        return_payload = {"status": "success", "message": "GET accepted"}
-        return jsonify(return_payload), 200
+        current_app.logger.info("Health check GET request accepted.")
+        return jsonify({"status": "success", "message": "GET accepted"}), 200
 
     def post(self):
         """

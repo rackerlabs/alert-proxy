@@ -45,8 +45,8 @@ spec:
       containers:
       - name: alert-proxy
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-        command: ["python"]
-        args: ["/opt/alert-proxy/alert_proxy/alertproxy.py", "--config", "/opt/alert-proxy/config/config.yaml"]
+        command: ["uwsgi"]
+        args: ["--ini", "/opt/alert-proxy/src/config/uwsgi.ini", "--daemonize=alert-proxy"]
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         {{- with .Values.securityContext }}
         securityContext:
@@ -74,12 +74,8 @@ spec:
               name: {{ .Values.secrets.alertManagerBaseUrl.name }}
               key: {{ .Values.secrets.alertManagerBaseUrl.key }}
         volumeMounts:
-        {{- if .Values.pvc.enabled }}
-        - name: alert-proxy-volume
-          mountPath: /opt/alert-proxy/logs
-        {{- end }}
         - name: config-volume
-          mountPath: /opt/alert-proxy/config/config.yaml
+          mountPath: /opt/alert-proxy/src/config/config.yaml
           subPath: config.yaml
           readOnly: true
         {{- with .Values.volumeMounts }}
@@ -98,11 +94,6 @@ spec:
           {{- toYaml . | nindent 10 }}
         {{- end }}
       volumes:
-      {{- if .Values.pvc.enabled }}
-      - name: alert-proxy-volume
-        persistentVolumeClaim:
-          claimName: {{ .Values.pvc.name }}
-      {{- end }}
       - name: config-volume
         configMap:
           name: {{ include "alert-proxy.fullname" . }}-config

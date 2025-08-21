@@ -16,21 +16,11 @@ service:
   port: 80
   targetPort: 8000
 
-pvc:
-  enabled: true
-  name: alert-proxy-volume-claim
-  accessModes:
-    - ReadWriteOnce
-  storage: 20Gi
-
 # These secrets must exist in the target namespace before deploying the chart.
-# The 'name' refers to the Kubernetes Secret object name.
-# The 'key' refers to the specific data key within that Secret.
-secrets:
 secrets:
   coreAccountId:
-    name: "core-account-id-secret" # Name of the existing Kubernetes Secret
-    key: "core_account_number"     # Key within that Secret
+    name: "core-account-id-secret"
+    key: "core_account_number"
   overseerDeviceId:
     name: "overseer-core-device-id-secret"
     key: "overseer_core_device_id"
@@ -46,10 +36,7 @@ config:
   app_debug: false
   logging:
     log_level: 'INFO'
-    log_dir: 'logs'
-    log_file_name: 'alert_proxy.log'
   alert_proxy_config:
-    log_level: 'INFO'
     alert_verification: true
     create_ticket: true
     # core_account_id, core_overseer_id, account_secret,
@@ -58,17 +45,17 @@ config:
 
 livenessProbe:
   httpGet:
-    path: /
+    path: /process
     port: 80
-  initialDelaySeconds: 30
+  initialDelaySeconds: 10
   periodSeconds: 10
   timeoutSeconds: 5
   failureThreshold: 3
 readinessProbe:
   httpGet:
-    path: /
+    path: /process
     port: 80
-  initialDelaySeconds: 15
+  initialDelaySeconds: 10
   periodSeconds: 10
   timeoutSeconds: 5
   failureThreshold: 3

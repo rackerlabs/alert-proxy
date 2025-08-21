@@ -15,10 +15,7 @@ data:
     app_debug: {{ .Values.config.app_debug }}
     logging:
       log_level: '{{ .Values.config.logging.log_level }}'
-      log_dir: '{{ .Values.config.logging.log_dir }}'
-      log_file_name: '{{ .Values.config.logging.log_file_name }}'
     alert_proxy_config:
-      log_level: '{{ .Values.config.alert_proxy_config.log_level }}'
       alert_verification: {{ .Values.config.alert_proxy_config.alert_verification }}
       # Secrets are now sourced from environment variables injected by the Deployment.
       core_account_id: "${CORE_ACCOUNT_NUMBER}"
