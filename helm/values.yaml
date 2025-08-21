@@ -3,7 +3,8 @@ namespace: rackspace
 replicaCount: 1
 
 image:
-  repository: ghcr.io/rackerlabs/alert-proxy
+  repository: ghcr.io/rackerlabs/genestack-images/alert-proxy
+  name: alert-proxy
   tag: latest
   pullPolicy: IfNotPresent
 
@@ -42,7 +43,6 @@ secrets:
 
 config:
   debug: false
-  testing: false
   app_debug: false
   logging:
     log_level: 'INFO'
@@ -51,6 +51,7 @@ config:
   alert_proxy_config:
     log_level: 'INFO'
     alert_verification: true
+    create_ticket: true
     # core_account_id, core_overseer_id, account_secret,
     # am_v2_base_url are now expected to be provided via environment variables,
     # which are sourced from existing Kubernetes Secrets.
