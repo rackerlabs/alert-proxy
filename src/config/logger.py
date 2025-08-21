@@ -9,7 +9,7 @@
 from flask import request, has_request_context
 from config.config import settings
 import logging
-import os
+import sys
 
 class RequestFormatter(logging.Formatter):
     def format(self, record):
@@ -23,18 +23,10 @@ class RequestFormatter(logging.Formatter):
 class AlertProxyLogger:
     def __init__(self, app):
         self.app = app
-        # Construct the full log file path
-        self.log_dir = settings.logging.log_dir
-        self.log_file = settings.logging.log_file_name
         self.level = settings.logging.log_level
-        self.log_path = os.path.join(self.log_dir, self.log_file)
         self._configure_logger()
 
     def _configure_logger(self):
-        # Create the log directory if it doesn't exist
-        if not os.path.exists(self.log_dir):
-            os.makedirs(self.log_dir)
-
         # Remove all existing handlers from the app logger
         while self.app.logger.hasHandlers():
             self.app.logger.removeHandler(self.app.logger.handlers[0])
@@ -42,18 +34,18 @@ class AlertProxyLogger:
         # Set the level for the Flask app's logger
         self.app.logger.setLevel(self.level)
 
-        # Create a file handler
-        file_handler = logging.FileHandler(self.log_path)
-        file_handler.setLevel(self.level)
+        # Create a stream handler to log to stdout
+        stream_handler = logging.StreamHandler(sys.stdout)
+        stream_handler.setLevel(self.level)
 
         # Create a formatter
         formatter = RequestFormatter(
             '[%(asctime)s] [%(levelname)s] [%(request_id)s] %(module)s: %(message)s'
         )
-        file_handler.setFormatter(formatter)
+        stream_handler.setFormatter(formatter)
 
-        # Add the file handler to the app's logger
-        self.app.logger.addHandler(file_handler)
+        # Add the stream handler to the app's logger
+        self.app.logger.addHandler(stream_handler)
         self.app.logger.propagate = False
 
     def debug(self, message, *args, **kwargs):
@@ -70,4 +62,3 @@ class AlertProxyLogger:
 
     def critical(self, message, *args, **kwargs):
         self.app.logger.critical(message, *args, **kwargs)
-
