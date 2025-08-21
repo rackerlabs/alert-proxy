@@ -20,7 +20,7 @@ class ProcessAlert(MethodView):
         """
         Query Alert Manager API by fingerprint and confirm status is firing
         Args:
-            fingerprint (str): Alert fingercurrent_app.logger.debug to filter on
+            fingerprint (str): Alert fingerprint to filter on
         """
         alert_status = None
         is_firing = False
@@ -89,7 +89,7 @@ class ProcessAlert(MethodView):
                 current_app.logger.info(f"Value of INVALID data: { alert_data }")
                 current_app.logger.info(f"END alert processing......")
                 return jsonify({"message": f"Invalid or missing json payload"}), 400
-            current_app.logger.debug(f"Value of post from alertmanager webhook: { alert_data }")
+            current_app.logger.debug(f"Value of post from alertmanager receiver webhook: { alert_data }")
         else:
             current_app.logger.error(f"Invalid of missing Contect-Type of application/json")
             current_app.logger.info(f"END alert processing......")
@@ -99,7 +99,7 @@ class ProcessAlert(MethodView):
         if has_request_context():
             request_id = request.environ.get("HTTP_X_REQUEST_ID")
 
-        # set some values or defaults if not defined
+        # Configure top-level alert variables
         a_name = alert_data['commonLabels'].get('alertname', "NONE")
         a_status = "ALARM" if alert_data['status'] == "firing" else "OK" if alert_data['status'] == "resolved" else "OK"
         a_subject = alert_data['commonAnnotations'].get('summary', 'SUMMARY')
@@ -108,7 +108,7 @@ class ProcessAlert(MethodView):
         a_coreAccountID = alert_data['commonLabels'].get('coreAccountID', settings.alert_proxy_config.account_secret)
         a_secret = settings.alert_proxy_config.account_secret
 
-
+        # loop through all alerts contained in the receiver webhook payload
         alerts = alert_data.get('alerts', [])
         current_app.logger.info(f"Received alert dump.  Total number of alerts to process: { len(alerts) }")
         count = 0;
@@ -153,8 +153,13 @@ Suppression Link: { settings.alert_proxy_config.am_v2_base_url }/#/alerts?filter
             }
             # post the payload against watchman
             try:
-                response = self._create_core_ticket(w_url, w_headers, w_payload)
-#                current_app.logger.debug(f"RESPONSE: { response }")
+                current_app.logger.debug(f"w_url: { w_url }")
+                current_app.logger.debug(f"w_headers: { w_headers }")
+                current_app.logger.debug(f"w_body: { w_body }")
+                current_app.logger.debug(f"w_payload: { w_payload }")
+                if settings.alert_proxy_config.create_ticket:
+                    response = self._create_core_ticket(w_url, w_headers, w_payload)
+                else:
             except Exception as e:
                 current_app.logger.error(f"Uncaught error: {str(e)}")
                 continue

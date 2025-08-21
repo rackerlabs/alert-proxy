@@ -43,10 +43,10 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       containers:
-      - name: ubuntu
+      - name: alert-proxy
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         command: ["python"]
-        args: ["/opt/alert-proxy/alert_proxy/process_alert.py", "--config", "/opt/alert-proxy/config/config.yaml"]
+        args: ["/opt/alert-proxy/alert_proxy/alertproxy.py", "--config", "/opt/alert-proxy/config/config.yaml"]
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         {{- with .Values.securityContext }}
         securityContext:
