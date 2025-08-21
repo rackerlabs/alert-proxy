@@ -46,7 +46,7 @@ spec:
       - name: alert-proxy
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         command: ["uwsgi"]
-        args: ["--ini", "/opt/alert-proxy/src/config/uwsgi.ini", "--daemonize=alert-proxy"]
+        args: ["--ini", "/etc/alert-proxy/uwsgi.ini", "--daemonize=alert-proxy"]
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         {{- with .Values.securityContext }}
         securityContext:
@@ -74,9 +74,12 @@ spec:
               name: {{ .Values.secrets.alertManagerBaseUrl.name }}
               key: {{ .Values.secrets.alertManagerBaseUrl.key }}
         volumeMounts:
-        - name: config-volume
-          mountPath: /opt/alert-proxy/src/config/config.yaml
+        - name: alert-proxy-config-volume
+          mountPath: /etc/alert-proxy/alert-proxy-config.yaml
           subPath: config.yaml
+          readOnly: true
+        - name: uwsgi-config-volume
+          mountPath: /etc/alert-proxy/uwsgi.ini
           readOnly: true
         {{- with .Values.volumeMounts }}
         {{- toYaml . | nindent 8 }}
@@ -94,9 +97,12 @@ spec:
           {{- toYaml . | nindent 10 }}
         {{- end }}
       volumes:
-      - name: config-volume
+      - name: alert-proxy-config-volume
         configMap:
           name: {{ include "alert-proxy.fullname" . }}-config
+      - name: uwsgi-config-volume
+        configMap:
+          name: {{ include "alert-proxy.fullname" . }}-uwsgi-config
       {{- with .Values.volumes }}
       {{- toYaml . | nindent 6 }}
       {{- end }}
