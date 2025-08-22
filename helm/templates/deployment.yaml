@@ -46,12 +46,15 @@ spec:
       - name: alert-proxy
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         command: ["uwsgi"]
-        args: ["--ini", "/etc/alert-proxy/uwsgi.ini", "--daemonize=alert-proxy"]
+        args: ["--ini", "/etc/alert-proxy/uwsgi.ini"]
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         {{- with .Values.securityContext }}
         securityContext:
           {{- toYaml . | nindent 10 }}
         {{- end }}
+        ports:
+        - containerPort: 8000
+          name: http
         env: # Re-added: Injecting secrets as environment variables from existing Secrets
         - name: CORE_ACCOUNT_NUMBER
           valueFrom:

@@ -58,7 +58,7 @@ uwsgi:
 livenessProbe:
   httpGet:
     path: /process
-    port: 80
+    port: 8000
   initialDelaySeconds: 10
   periodSeconds: 10
   timeoutSeconds: 5
@@ -66,7 +66,7 @@ livenessProbe:
 readinessProbe:
   httpGet:
     path: /process
-    port: 80
+    port: 8000
   initialDelaySeconds: 10
   periodSeconds: 10
   timeoutSeconds: 5
