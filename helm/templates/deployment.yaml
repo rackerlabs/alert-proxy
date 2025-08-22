@@ -78,11 +78,12 @@ spec:
               key: {{ .Values.secrets.alertManagerBaseUrl.key }}
         volumeMounts:
         - name: alert-proxy-config-volume
-          mountPath: /etc/alert-proxy/alert-proxy-config.yaml
+          mountPath: /etc/alert-proxy/config.yaml
           subPath: config.yaml
           readOnly: true
         - name: uwsgi-config-volume
           mountPath: /etc/alert-proxy/uwsgi.ini
+          subPath: uwsgi.ini
           readOnly: true
         {{- with .Values.volumeMounts }}
         {{- toYaml . | nindent 8 }}

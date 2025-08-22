@@ -17,6 +17,7 @@ data:
       log_level: '{{ .Values.config.logging.log_level }}'
     alert_proxy_config:
       alert_verification: {{ .Values.config.alert_proxy_config.alert_verification }}
+      create_ticket:: {{ .Values.config.alert_proxy_config.create_ticket }}
       # Secrets are now sourced from environment variables injected by the Deployment.
       core_account_id: "${CORE_ACCOUNT_NUMBER}"
       core_overseer_id: "${OVERSEER_CORE_DEVICE_ID}"
