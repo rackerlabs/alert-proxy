@@ -9,6 +9,7 @@
 import yaml
 import os
 
+
 class Config:
     _instance = None
     _initialized = False
@@ -51,6 +52,6 @@ class Config:
             else:
                 setattr(self, key, value)
 
+
 # This line reads the specified file
 settings = Config("/etc/alert-proxy/config.yaml")
-

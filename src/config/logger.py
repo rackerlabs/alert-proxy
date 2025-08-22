@@ -11,14 +11,16 @@ from config.config import settings
 import logging
 import sys
 
+
 class RequestFormatter(logging.Formatter):
     def format(self, record):
-        record.request_id = 'NA'
+        record.request_id = "NA"
 
         if has_request_context():
             record.request_id = request.environ.get("HTTP_X_REQUEST_ID")
 
         return super().format(record)
+
 
 class AlertProxyLogger:
     def __init__(self, app):
@@ -40,7 +42,7 @@ class AlertProxyLogger:
 
         # Create a formatter
         formatter = RequestFormatter(
-            '[%(asctime)s] [%(levelname)s] [%(request_id)s] %(module)s: %(message)s'
+            "[%(asctime)s] [%(levelname)s] [%(request_id)s] %(module)s: %(message)s"
         )
         stream_handler.setFormatter(formatter)
 
