@@ -8,6 +8,6 @@
 #                                           |___/
 from flask import Blueprint
 
-process_alert_bp = Blueprint('process_alert_bp', __name__, url_prefix='/alert')
+process_alert_bp = Blueprint("process_alert_bp", __name__, url_prefix="/alert")
 
 from . import process_alert
