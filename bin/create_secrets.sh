@@ -14,8 +14,7 @@ kubectl create namespace "$NAMESPACE" --dry-run=client -o yaml | kubectl apply -
 
 read -rp "Core Account Number: " CORE_ACCOUNT_NUMBER
 read -rp "Overseer Core Device ID: " OVERSEER_CORE_DEVICE_ID
-read -rsp "Account Service Token: " ACCOUNT_SERVICE_TOKEN
-echo # Add a newline after the password prompt for cleaner output
+read -rp "Account Service Token: " ACCOUNT_SERVICE_TOKEN
 read -rp "Alert Manager Base URL: " ALERT_MANAGER_BASE_URL
 
 echo "Creating Kubernetes Secrets..."
