@@ -23,9 +23,15 @@ class ProcessAlert(MethodView):
         """
         alert_status = None
         is_firing = False
+        filtered_alerts = []
 
+        current_app.logger.debug(
+            f"alert_proxy_config.am_v2_base_url: { settings.alert_proxy_config.am_v2_base_url }"
+        )
         response = requests.get(settings.alert_proxy_config.am_v2_base_url)
-
+        current_app.logger.debug(
+            f"Response from am_v2_base_url: { response.json() }"
+        )
         if response.status_code == 200:
             alerts = response.json()
             if not alerts:
@@ -33,12 +39,11 @@ class ProcessAlert(MethodView):
                     f"No alerts returned by { settings.alert_proxy_config.am_v2_base_url }"
                 )
                 return is_firing
-            for alert in alerts:
-                if alert["fingerprint"] == fingerprint:
-                    alert_status = alert["status"].get("state")
-                    current_app.logger.info(
-                        f"Alertmanater api reports alert with fingerprint { fingerprint } has a status of: { alert_status } "
-                    )
+            filtered_alerts = [alert for alert in alerts if alert.get("fingerprint") == fingerprint]
+            alert_status = alert["status"].get("state", "NONE")
+            current_app.logger.info(
+                f"Alertmanater api reports alert with fingerprint { fingerprint } has a status of: { alert_status } "
+            )
         else:
             current_app.logger.error(
                 f"Failed to retrieve alerts. Status code: {response.status_code}"
