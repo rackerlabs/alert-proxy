@@ -40,10 +40,11 @@ class ProcessAlert(MethodView):
                 )
                 return is_firing
             filtered_alerts = [alert for alert in alerts if alert.get("fingerprint") == fingerprint]
-            alert_status = alert["status"].get("state", "NONE")
-            current_app.logger.info(
-                f"Alertmanater api reports alert with fingerprint { fingerprint } has a status of: { alert_status } "
-            )
+            for alert in filtered_alerts:
+                alert_status = alert["status"].get("state", "NONE")
+                current_app.logger.info(
+                    f"Alertmanater api reports alert with fingerprint { fingerprint } has a status of: { alert_status } "
+                )
         else:
             current_app.logger.error(
                 f"Failed to retrieve alerts. Status code: {response.status_code}"
