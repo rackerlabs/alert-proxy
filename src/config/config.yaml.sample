@@ -1,0 +1,11 @@
+debug: false
+app_debug: false
+logging:
+  log_level: INFO
+alert_proxy_config:
+  alert_verification: true
+  create_ticket: true
+  core_account_id: ${CORE_ACCOUNT_NUMBER}
+  core_overseer_id: ${OVERSEER_CORE_DEVICE_ID}
+  account_secret: ${ACCOUNT_SERVICE_TOKEN}
+  am_v2_base_url: ${ALERT_MANAGER_BASE_URL}

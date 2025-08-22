@@ -76,8 +76,7 @@ class ProcessAlert(MethodView):
         content_type = request.headers.get('Content-Type')
 
         # set the request-id for inclusion into the core ticket
-        if has_request_context():
-            request_id = request.environ.get("HTTP_X_REQUEST_ID")
+        request_id = request.environ.get("HTTP_X_REQUEST_ID") if has_request_context() else None
 
         if content_type == 'application/json':
             alert_data = request.get_json(silent=True)
@@ -93,29 +92,29 @@ class ProcessAlert(MethodView):
             current_app.logger.info(f"END alert processing......")
             return jsonify({"message": "Content-Type is not application/json"}), 400
 
-        # set the request-id for inclusion into the core ticket
-        if has_request_context():
-            request_id = request.environ.get("HTTP_X_REQUEST_ID")
 
         # Configure top-level alert variables
         a_name = alert_data['commonLabels'].get('alertname', "NONE")
         a_status = "ALARM" if alert_data['status'] == "firing" else "OK" if alert_data['status'] == "resolved" else "OK"
         a_subject = alert_data['commonAnnotations'].get('summary', 'SUMMARY')
         a_description = alert_data['commonAnnotations'].get('description', 'DESCRIPTION')
-        a_oversserID = alert_data['commonLabels'].get('oversserID', settings.alert_proxy_config.core_overseer_id)
+        a_overseerID = alert_data['commonLabels'].get('overseerID', settings.alert_proxy_config.core_overseer_id)
         a_coreAccountID = alert_data['commonLabels'].get('coreAccountID', settings.alert_proxy_config.account_secret)
         a_secret = settings.alert_proxy_config.account_secret
 
         # loop through all alerts contained in the receiver webhook payload
         alerts = alert_data.get('alerts', [])
         current_app.logger.info(f"Received alert dump.  Total number of alerts to process: { len(alerts) }")
-        count = 0;
+        count = 0
         for alert in alerts:
             count += 1
-            a_fingerprint = alert.get('fingerprint','UNKNOWN')
-            a_severity = alert.get('severity', 'warning')
+            a_fingerprint = alert.get('fingerprint', 'UNKNOWN')
+            a_severity = alert.get('labels', {}).get('severity', 'warning')
+            #a_severity = alert.get('severity', 'warning')
             current_app.logger.info(f"Processing { count } of { len(alerts) } ...")
-            alert['labels']['request-id'] = request_id
+            alert['labels']['request-id'] = request_id if request_id else "NONE"
+            if request_id:
+                alert.setdefault('labels', {})['request-id'] = request_id
             current_app.logger.debug(f"Alert { count } payload: { alert }")
             if settings.alert_proxy_config.alert_verification:
                 if self._is_alert_still_firing(a_fingerprint):
@@ -125,20 +124,24 @@ class ProcessAlert(MethodView):
                     continue
             current_app.logger.info(f"Formatting alert for watchman ingestion")
             if a_severity == "warning":
-                w_url = f"https://watchman.api.manage.rackspace.com/v1/hybrid:{ a_coreAccountID }/webhook/platformservices?secret={ a_secret }&severity=low"
+                w_url = (
+                    f"https://watchman.api.manage.rackspace.com/v1/hybrid:{ a_coreAccountID }/webhook/platformservices?secret={ a_secret }&severity=low"
+                )
             else:
-                w_url = f"https://watchman.api.manage.rackspace.com/v1/hybrid:{ a_coreAccountID }/webhook/platformservices?secret={ a_secret }&severity=high"
+                w_url = (
+                    f"https://watchman.api.manage.rackspace.com/v1/hybrid:{ a_coreAccountID }/webhook/platformservices?secret={ a_secret }&severity=high"
+                )
             w_headers = {
                     "Accept": "application/json",
                     "Content-Type": "application/json"
             }
             w_body = f"""Severity: { a_severity }
-Instance: { alert.get('labels', {}).get('instance','UNKNOWN') }
-coreDeviceID: { alert.get('coreDeviceID', 'UNKNWON') }
+Instance: { alert.get('labels', {}).get('instance', 'UNKNOWN') }
+coreDeviceID: { alert.get('labels', {}).get('coreDeviceID', 'UNKNOWN') }
 coreAccountID: { a_coreAccountID }
 overseerID: { a_overseerID }
 Description: { a_description }
-Started at: { alert.get('startsAt','UNKNOWN') }
+Started at: { alert.get('startsAt', 'UNKNOWN') }
 Suppression Link: { settings.alert_proxy_config.am_v2_base_url }/#/alerts?filter=%7Balertname%3D%22{ a_name }%22%2C%20rackspace_com_coreAccountID%3D%22{ a_coreAccountID }%22%2C%20rackspace_com_overseerID%3D%22{ a_overseerID }%22%2C%20severity%3D%22{ a_severity }%22%7D
 """
             w_payload = {
@@ -157,7 +160,6 @@ Suppression Link: { settings.alert_proxy_config.am_v2_base_url }/#/alerts?filter
                 current_app.logger.debug(f"w_payload: { w_payload }")
                 if settings.alert_proxy_config.create_ticket:
                     response = self._create_core_ticket(w_url, w_headers, w_payload)
-                else:
             except Exception as e:
                 current_app.logger.error(f"Uncaught error: {str(e)}")
                 continue

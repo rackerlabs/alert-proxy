@@ -43,10 +43,22 @@ config:
     # am_v2_base_url are now expected to be provided via environment variables,
     # which are sourced from existing Kubernetes Secrets.
 
+uwsgi:
+  module: "wsgi:app"
+  uid: "alert-proxy"
+  gid: "alert-proxy"
+  httpPort: 8000
+  master: true
+  processes: 4
+  threads: 1
+  vacuum: true
+  dieOnTerm: true
+  disableLogging: true
+
 livenessProbe:
   httpGet:
     path: /process
-    port: 80
+    port: 8000
   initialDelaySeconds: 10
   periodSeconds: 10
   timeoutSeconds: 5
@@ -54,7 +66,7 @@ livenessProbe:
 readinessProbe:
   httpGet:
     path: /process
-    port: 80
+    port: 8000
   initialDelaySeconds: 10
   periodSeconds: 10
   timeoutSeconds: 5
