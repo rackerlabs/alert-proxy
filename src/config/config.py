@@ -1,3 +1,4 @@
+#   ___  _           _  ______
 #  / _ \| |         | | | ___ \
 # / /_\ \ | ___ _ __| |_| |_/ / __ _____  ___   _
 # |  _  | |/ _ \ '__| __|  __/ '__/ _ \ \/ / | | |
@@ -7,6 +8,7 @@
 #                                           |___/
 import yaml
 import os
+
 
 class Config:
     _instance = None
@@ -31,20 +33,6 @@ class Config:
             return [self._resolve_env(v) for v in value]
         return value
 
-    def _dict_to_obj(self, d):
-        """Recursively converts a dictionary to an object."""
-        if not isinstance(d, dict):
-            return d
-        
-        # Create a new dynamic class with attributes from the dictionary
-        class_name = "DynamicConfig"
-        DynamicClass = type(class_name, (object,), {})
-        obj = DynamicClass()
-        
-        for k, v in d.items():
-            setattr(obj, k, self._dict_to_obj(v))
-        return obj
-
     def _load_config(self, filename):
         try:
             with open(filename, "r") as file:
@@ -57,6 +45,13 @@ class Config:
             config_data = {}
 
         processed_data = self._resolve_env(config_data)
-        
+
         for key, value in processed_data.items():
-            setattr(self, key, self._dict_to_obj(value))
+            if isinstance(value, dict):
+                setattr(self, key, type(key.capitalize(), (object,), value)())
+            else:
+                setattr(self, key, value)
+
+
+# This line reads the specified file
+settings = Config("/etc/alert-proxy/config.yaml")
