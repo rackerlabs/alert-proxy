@@ -126,7 +126,7 @@ class ProcessAlert(MethodView):
             "overseerID", settings.alert_proxy_config.core_overseer_id
         )
         a_coreAccountID = alert_data["commonLabels"].get(
-            "coreAccountID", settings.alert_proxy_config.account_secret
+            "coreAccountID", settings.alert_proxy_config.core_account_id
         )
         a_secret = settings.alert_proxy_config.account_secret
 
