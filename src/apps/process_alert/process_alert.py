@@ -120,7 +120,7 @@ class ProcessAlert(MethodView):
         )
         a_subject = alert_data["commonAnnotations"].get("summary", "SUMMARY")
         a_description = alert_data["commonAnnotations"].get(
-            "description", "DESCRIPTION"
+            "description", "FIXME: DESCRIPTION NOT PROVIDED IN ALERT"
         )
         a_overseerID = alert_data["commonLabels"].get(
             "overseerID", settings.alert_proxy_config.core_overseer_id
@@ -148,10 +148,12 @@ class ProcessAlert(MethodView):
             current_app.logger.debug(f"Alert { count } payload: { alert }")
             if settings.alert_proxy_config.alert_verification:
                 if self._is_alert_still_firing(a_fingerprint):
+                    a_alert_still_firing = True
                     current_app.logger.info(
                         f"Alert with fingerprint: { a_fingerprint } is still firing. creating ticket..."
                     )
                 else:
+                    a_alert_still_firing = False
                     current_app.logger.info(
                         f"Alert with fingerprint: { a_fingerprint } is not active. skipping ticket creation."
                     )
@@ -165,20 +167,33 @@ class ProcessAlert(MethodView):
                 "Accept": "application/json",
                 "Content-Type": "application/json",
             }
-            w_body = f"""Severity: { a_severity }
-Instance: { alert.get('labels', {}).get('instance', 'UNKNOWN') }
+            w_body = f"""########## ALERT DETAILS
+Name: { a_subject}
+Instance: { alert.get('labels', {}).get('instance', 'FIXME: instance not defined.') }
+Description: { a_description }
+Severity: { a_severity }
+Alert Still Firing: { a_alert_still_firing }
+Started at: { alert.get('startsAt', 'FIXME: startsAt not defined.') }
+
+########## CONNECTION INFO
 coreDeviceID: { alert.get('labels', {}).get('coreDeviceID', 'UNKNOWN') }
 coreAccountID: { a_coreAccountID }
 overseerID: { a_overseerID }
-Description: { a_description }
-Started at: { alert.get('startsAt', 'UNKNOWN') }
+
+########## LINKS
 Suppression Link: { settings.alert_proxy_config.am_v2_base_url }/#/alerts?filter=%7Balertname%3D%22{ a_name }%22%2C%20rackspace_com_coreAccountID%3D%22{ a_coreAccountID }%22%2C%20rackspace_com_overseerID%3D%22{ a_overseerID }%22%2C%20severity%3D%22{ a_severity }%22%7D
+Grafana: grafana.{ settings.alert_proxy_config.http_route_fqdn }
+Alertmanager: alertmanager.{ settings.alert_proxy_config.http_route_fqdn }
+Prometheus: prometheus.{ settings.alert_proxy_config.http_route_fqdn }
+
+########## ALERT-PROXY INFO
+Request-ID: { alert_get('labels', {}).get('request-id', 'FIXME: request-id not defined.') }
 """
             w_payload = {
-                "subject": f"ALERT-PROXY-{ a_subject }",
+                "subject": f"[ALERT-PROXY] { a_subject }",
                 "body": w_body,
                 "privateComment": "\n".join(
-                    [f"{x}:{v}" for x, v in alert.get("labels").items()]
+                    [f"{x}: {v}" for x, v in alert.get("labels").items()]
                 ),
                 "alarmState": a_status,
                 "threadId": f"{ a_coreAccountID }-{ a_fingerprint }",
