@@ -76,6 +76,11 @@ spec:
             secretKeyRef:
               name: {{ .Values.secrets.alertManagerBaseUrl.name }}
               key: {{ .Values.secrets.alertManagerBaseUrl.key }}
+        - name: HTTP_ROUTE_FQDN
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.secrets.httpRouteFQDN.name }}
+              key: {{ .Values.secrets.httpRouteFQDN.key }}
         volumeMounts:
         - name: alert-proxy-config-volume
           mountPath: /etc/alert-proxy/config.yaml

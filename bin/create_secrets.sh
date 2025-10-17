@@ -16,6 +16,7 @@ read -rp "Core Account Number: " CORE_ACCOUNT_NUMBER
 read -rp "Overseer Core Device ID: " OVERSEER_CORE_DEVICE_ID
 read -rp "Account Service Token: " ACCOUNT_SERVICE_TOKEN
 read -rp "Alert Manager Base URL: " ALERT_MANAGER_BASE_URL
+read -rp "Base URL: " HTTP_ROUTE_FQDN
 
 echo "Creating Kubernetes Secrets..."
 
@@ -61,7 +62,6 @@ cat <<EOF | kubectl apply -f -
 apiVersion: v1
 kind: Secret
 metadata:
-  # CORRECTED: Name must be all lowercase as per RFC 1123 and values.yaml
   name: alert-manager-base-url-secret
   namespace: $NAMESPACE
 type: Opaque
@@ -69,4 +69,15 @@ data:
   alert_manager_base_url: $(echo -n "$ALERT_MANAGER_BASE_URL" | base64 -w0)
 EOF
 
+# Create http_route_fqdn
+cat <<EOF | kubectl apply -f -
+apiVersion: v1
+kind: Secret
+metadata:
+  name: http-route-fqdn-secret
+  namespace: $NAMESPACE
+type: Opaque
+data:
+  http_route_fqdn: $(echo -n "$HTTP_ROUTE_FQDN" | base64 -w0)
+EOF
 echo "All secrets have been created in the '$NAMESPACE' namespace."

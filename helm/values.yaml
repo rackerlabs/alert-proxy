@@ -30,6 +30,9 @@ secrets:
   alertManagerBaseUrl:
     name: "alert-manager-base-url-secret"
     key: "alert_manager_base_url"
+  httpRouteFQDN:
+    name: "http-route-fqdn-secret"
+    key: "http_route_fqdn"
 
 config:
   debug: false
@@ -40,8 +43,8 @@ config:
     alert_verification: true
     create_ticket: true
     # core_account_id, core_overseer_id, account_secret,
-    # am_v2_base_url are now expected to be provided via environment variables,
-    # which are sourced from existing Kubernetes Secrets.
+    # am_v2_base_url, http_route_fqdn  are now expected to be provided via
+    # environment variables, which are sourced from Secrets.
 
 uwsgi:
   module: "wsgi:app"
