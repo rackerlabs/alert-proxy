@@ -22,5 +22,5 @@ data:
       core_account_id: "${CORE_ACCOUNT_NUMBER}"
       core_overseer_id: "${OVERSEER_CORE_DEVICE_ID}"
       account_secret: "${ACCOUNT_SERVICE_TOKEN}"
-      am_v2_service_url: "${ALERT_MANAGER_BASE_URL}"
+      alert_manager_url: "${ALERT_MANAGER_URL}"
       http_route_fqdn: "${HTTP_ROUTE_FQDN}"
