@@ -26,17 +26,17 @@ class ProcessAlert(MethodView):
         filtered_alerts = []
 
         current_app.logger.debug(
-            f"alert_proxy_config.am_v2_base_url: { settings.alert_proxy_config.am_v2_base_url }"
+            f"alert_proxy_config.alert_manager_url: { settings.alert_proxy_config.alert_manager_url }"
         )
-        response = requests.get(settings.alert_proxy_config.am_v2_base_url)
+        response = requests.get(settings.alert_proxy_config.alert_manager_url)
         current_app.logger.debug(
-            f"Response from am_v2_base_url: { response.json() }"
+            f"Response from alert_manager_url: { response.json() }"
         )
         if response.status_code == 200:
             alerts = response.json()
             if not alerts:
                 current_app.logger.info(
-                    f"No alerts returned by { settings.alert_proxy_config.am_v2_base_url }"
+                    f"No alerts returned by { settings.alert_proxy_config.alert_manager_url }"
                 )
                 return is_firing
             filtered_alerts = [alert for alert in alerts if alert.get("fingerprint") == fingerprint]
@@ -181,7 +181,7 @@ coreAccountID: { a_coreAccountID }
 overseerID: { a_overseerID }
 
 ########## LINKS
-Suppression Link: { settings.alert_proxy_config.am_v2_base_url }/#/alerts?filter=%7Balertname%3D%22{ a_name }%22%2C%20rackspace_com_coreAccountID%3D%22{ a_coreAccountID }%22%2C%20rackspace_com_overseerID%3D%22{ a_overseerID }%22%2C%20severity%3D%22{ a_severity }%22%7D
+Suppression Link: { settings.alert_proxy_config.alert_manager_url }/#/alerts?filter=%7Balertname%3D%22{ a_name }%22%2C%20rackspace_com_coreAccountID%3D%22{ a_coreAccountID }%22%2C%20rackspace_com_overseerID%3D%22{ a_overseerID }%22%2C%20severity%3D%22{ a_severity }%22%7D
 Grafana: grafana.{ settings.alert_proxy_config.http_route_fqdn }
 Alertmanager: alertmanager.{ settings.alert_proxy_config.http_route_fqdn }
 Prometheus: prometheus.{ settings.alert_proxy_config.http_route_fqdn }
