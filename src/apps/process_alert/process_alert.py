@@ -187,7 +187,7 @@ Alertmanager: alertmanager.{ settings.alert_proxy_config.http_route_fqdn }
 Prometheus: prometheus.{ settings.alert_proxy_config.http_route_fqdn }
 
 ########## ALERT-PROXY INFO
-Request-ID: { alert_get('labels', {}).get('request-id', 'FIXME: request-id not defined.') }
+Request-ID: { alert.get('labels', {}).get('request-id', 'FIXME: request-id not defined.') }
 """
             w_payload = {
                 "subject": f"[ALERT-PROXY] { a_subject }",
