@@ -27,9 +27,9 @@ secrets:
   accountServiceToken:
     name: "account-service-token-secret"
     key: "account_service_token"
-  alertManagerBaseUrl:
-    name: "alert-manager-base-url-secret"
-    key: "alert_manager_base_url"
+  alertManagerUrl:
+    name: "alert-manager-url-secret"
+    key: "alert_manager_url"
   httpRouteFQDN:
     name: "http-route-fqdn-secret"
     key: "http_route_fqdn"
