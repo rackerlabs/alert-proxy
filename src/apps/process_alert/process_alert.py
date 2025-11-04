@@ -172,7 +172,6 @@ Name: { a_subject}
 Instance: { alert.get('labels', {}).get('instance', 'FIXME: instance not defined.') }
 Description: { a_description }
 Severity: { a_severity }
-Alert Still Firing: { a_alert_still_firing }
 Started at: { alert.get('startsAt', 'FIXME: startsAt not defined.') }
 
 ########## CONNECTION INFO
