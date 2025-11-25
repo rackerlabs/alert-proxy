@@ -75,40 +75,8 @@ Part 2: From the Overseer / Deployment Node
 
 These steps involve preparing the environment and deploying the alert-proxy.
 
-6. Ensure Deployment Key is in GitHub
 
-Ensure the deployment environment has a deployment key added to the github.com/rackerlabs/alert-proxy repository. If one doesn't exist, create one and upload it.
-
-Creating a Deployment Key
-
-From the deployment node, navigate to ~/.ssh and run:
-Bash
-
-ssh-keygen -t ed25519
-
-SSH Configuration
-
-Add the following stanza to the SSH config file (~/.ssh/config):
-Code snippet
-
-Host github.com-alert-proxy
-    Hostname                  github.com
-    User                      git
-    IdentityFile              ~/.ssh/alert_proxy_dfw_prod
-    StrictHostKeyChecking     accept-new
-
-7. Create the alert-proxy Directory
-
-Create the /opt/alert-proxy directory.
-
-    NOTE: If working in flex, you may need to create the directory as the root user and then chown it to the ubuntu user and group.
-
-Command:
-Bash
-
-mkdir /opt/alert-proxy
-
-8. Git Clone the Repository
+7. Git Clone the Repository
 
 Clone the alert-proxy repository to the deployment/overseer node.
 
@@ -118,7 +86,7 @@ Bash
 cd /opt/alert-proxy
 git clone git@github.com-alert-proxy:rackerlabs/alert-proxy.git .
 
-9. Create Alert-Proxy Secrets
+8. Create Alert-Proxy Secrets
 
 Run the create_secrets.sh script and answer the prompts using the information gathered in Steps 1-3.
 
@@ -140,7 +108,7 @@ secret/alert-manager-base-url-secret created
 secret/http-route-fqdn-secret created
 All secrets have been created in the 'rackspace' namespace.
 
-10. Create Alert-Proxy Helm Overrides
+9. Create Alert-Proxy Helm Overrides
 
 Create the alert-proxy-overrides.yaml file in the /etc/genestack/helm-configs/alert-proxy/ directory.
 
@@ -163,7 +131,7 @@ config:
     create_ticket: false
 EOF
 
-11. Update Alertmanager Configuration
+10. Update Alertmanager Configuration
 
 Edit the Alertmanager configuration file to include a new webhook route and receiver for the alert-proxy.
 
@@ -194,7 +162,7 @@ YAML
           - url: 'http://alert-proxy.rackspace.svc.cluster.local/alert/process'
             send_resolved: false
 
-12. Install Alert-Proxy
+11. Install Alert-Proxy
 
 Install or upgrade alert-proxy using the installation script.
 
@@ -216,7 +184,7 @@ TEST SUITE: None
 /opt
 Helm upgrade/install process completed.
 
-13. Verify Pod Status
+12. Verify Pod Status
 
 Verify that the alert-proxy pod is running as expected in the rackspace namespace.
 
@@ -225,7 +193,7 @@ Bash
 
 kubectl get all -n rackspace
 
-14. Reinstall Prometheus
+13. Reinstall Prometheus
 
 Finally, reinstall Prometheus to apply the Alertmanager updates.
 
@@ -234,7 +202,7 @@ Bash
 
 /opt/genestack/bin/install-prometheus.sh
 
-15. View Alert-Proxy Logs
+14. View Alert-Proxy Logs
 
 View the alert-proxy logs to monitor its operation. Replace <pod_uuid> with the actual pod ID.
 
