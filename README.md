@@ -87,8 +87,7 @@ Clone the alert-proxy repository to the deployment/overseer node.
 Commands:
 
 ``` shell
-cd /opt/alert-proxy
-git clone git@github.com-alert-proxy:rackerlabs/alert-proxy.git .
+git clone https://github.com/rackerlabs/alert-proxy /opt/alert-proxy
 ```
 
 8. Create Alert-Proxy Secrets
