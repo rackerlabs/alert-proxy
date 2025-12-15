@@ -138,7 +138,7 @@ Edit the Alertmanager configuration file to include a new webhook route and rece
 Command:
 Bash
 
-vi /etc/genestack/helm-config/prometheus/alertmanager_config.yaml
+vi /etc/genestack/helm-configs/kube-prometheus-stack/alertmanager_config.yaml
 
 Route Section
 
@@ -200,7 +200,7 @@ Finally, reinstall Prometheus to apply the Alertmanager updates.
 Command:
 Bash
 
-/opt/genestack/bin/install-prometheus.sh
+/opt/genestack/bin/install-kube-prometheus-stack.sh
 
 14. View Alert-Proxy Logs
 
