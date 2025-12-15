@@ -224,7 +224,7 @@ View the alert-proxy logs to monitor its operation. Replace <pod_uuid> with the 
 Command:
 
 ``` shell
-kubectl -n rackspace logs alert-proxy-deployment-<pod_uuid> -f
+kubectl -n rackspace logs -l app.kubernetes.io/name=alert-proxy -f
 ```
 
 Troubleshooting
